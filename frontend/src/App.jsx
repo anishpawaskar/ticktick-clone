@@ -1,20 +1,13 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import { Auth } from "./components/Auth";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/singup" element={<p>Sign Up Page</p>} />
-        <Route
-          path="/"
-          element={
-            <div>
-              <h1>Tick tick clone</h1>
-              <Link to="/singup">To Sign Up</Link>
-            </div>
-          }
-        />
+        <Route path="/signup" element={<Auth />} />
+        <Route path="/signin" element={<Auth />} />
       </Routes>
     </>
   );
