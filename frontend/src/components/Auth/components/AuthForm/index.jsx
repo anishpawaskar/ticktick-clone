@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 import { AuthFormPresentation } from "./Presentation";
 import { selectAuth } from "../../authSlice";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const AuthForm = () => {
   const { currentPage } = useSelector(selectAuth);
@@ -14,6 +15,8 @@ export const AuthForm = () => {
 
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     if (e.target.name === "email") {
@@ -62,6 +65,7 @@ export const AuthForm = () => {
           invalidPassword: false,
         });
         console.log("submit data");
+        navigate("/task");
       } else if (emailRegex.test(email)) {
         setFormErrors({ ...formErrors, invalidPassword: true });
       } else if (password.length >= 6) {
