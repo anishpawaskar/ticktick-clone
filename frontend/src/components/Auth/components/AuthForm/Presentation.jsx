@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const AuthFormPresentation = ({
   currentPage,
   handleSubmit,
@@ -5,6 +7,8 @@ export const AuthFormPresentation = ({
   emailInputRef,
   passwordInputRef,
   handleInputChange,
+  signinIsLoading,
+  handleRedirection,
 }) => {
   return (
     <form onSubmit={handleSubmit} className="w-80 flex flex-col gap-4">
@@ -22,10 +26,23 @@ export const AuthFormPresentation = ({
           type="text"
           placeholder="Email"
         />
-        <p className="text-xs text-red-500 font-medium ml-3">
-          {formErrors.emptyEmailField && "Email address can't be empty"}
-          {formErrors.invalidEmail && "Invalid email format"}
-        </p>
+        {formErrors.serverError ? (
+          <p className="text-xs text-red-500 font-medium ml-3">
+            This email address is already registered, please{" "}
+            <Link
+              onClick={handleRedirection}
+              className="text-[#4772fa]"
+              to={"/signin"}
+            >
+              sign in
+            </Link>
+            .
+          </p>
+        ) : (
+          <p className="text-xs text-red-500 font-medium ml-3">
+            {formErrors.email}
+          </p>
+        )}
       </div>
       <div className="flex flex-col gap-2">
         <input
@@ -44,13 +61,19 @@ export const AuthFormPresentation = ({
           }
         />
         <p className="text-xs text-red-500 font-medium ml-3">
-          {formErrors.emptyPasswordField && "Password can't be empty"}
-          {formErrors.invalidPassword &&
-            "Password requires at least 6 characters."}
+          {formErrors.password}
         </p>
       </div>
-      <button className="w-full bg-[#4772fa] text-[13px] text-white py-2 rounded-[6px] hover:bg-[#597FFA] active:bg-[#3E60CD]">
-        {currentPage === "/signup" ? "Sign Up" : "Sign In"}
+      <button
+        style={{ background: signinIsLoading ? "#B5C6FD" : "#4772fa" }}
+        disabled={signinIsLoading ? true : false}
+        className="w-full bg-[#4772fa] text-[13px] text-white py-2 rounded-[6px] hover:bg-[#597FFA] active:bg-[#3E60CD]"
+      >
+        {currentPage === "/signup"
+          ? "Sign Up"
+          : signinIsLoading
+          ? "Sign In..."
+          : "Sign In"}
       </button>
     </form>
   );
