@@ -1,6 +1,3 @@
-import { DEFAULT_TODO_LIST, FEATURES_OPTIONS } from "./optionsPanel.constant";
-import { selectOptions } from "./optionsSlice";
-
 export const OptionsPanelPresentation = ({
   title,
   icons = {},
