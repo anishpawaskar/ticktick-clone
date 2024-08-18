@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export const SidebarPresentation = () => {
   return (
-    <div className="h-full w-[50px] flex flex-col items-center border-solid border-gray-50 bg-[#F9F9F9]">
+    <div className="hidden xs:flex h-full w-[50px] flex-col items-center border-solid border-gray-50 bg-[#F9F9F9]">
       <div className="h-10 w-10 px-1 py-[3px] my-4 flex justify-center bg-[#F1F1F1] border rounded-md">
         <ImUser className="h-full text-2xl text-gray-400" />
       </div>

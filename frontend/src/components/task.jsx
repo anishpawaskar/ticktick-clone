@@ -19,12 +19,12 @@ export const Task = () => {
       {currentPage === "/signup" && <OptionsPanel />}
       <Sidebar />
       <div className="flex overflow-hidden">
-        {isSidebarOpen && (
+        {/* {isSidebarOpen && (
           <div
             onClick={() => setIsSidebarOpen(false)}
             className="w-full h-full absolute top-0 left-0 z-10 sm:hidden"
           ></div>
-        )}
+        )} */}
         <TaskControlPanel isSidebarOpen={isSidebarOpen} />
       </div>
       <div className="flex flex-col flex-auto p-4 border">
