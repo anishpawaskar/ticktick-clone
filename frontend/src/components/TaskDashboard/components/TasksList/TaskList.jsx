@@ -14,8 +14,7 @@ export const TaskList = ({ task }) => {
         key={task.id}
         className="flex items-center justify-between h-10 px-4 border-b hover:bg-[#F7F7F7] hover:border-none rounded-md relative"
       >
-        {/* TODO: size should be same and alignment should be same */}
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           {task.items && (
             <button
               onClick={() => {
@@ -33,7 +32,6 @@ export const TaskList = ({ task }) => {
           <input type="checkbox" className="h-4 w-4 cursor-pointer" />
           <p className="text-sm">{task.title}</p>
         </div>
-        {/* TODO: size of both should be same */}
         <div className="flex items-center gap-1">
           {task?.items?.length > 0 && (
             <LuListTree className="text-xs text-[--icon-color]" />
