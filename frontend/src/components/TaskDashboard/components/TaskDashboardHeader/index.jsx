@@ -15,16 +15,19 @@ import {
   MODAL_LIST_2,
 } from "../../taskDashboard.constant";
 
-export const TaskDashboardHeader = ({ title }) => {
+export const TaskDashboardHeader = ({ title, toggleSidebar }) => {
   const { activeModal } = useSelector(selectActiveModal);
   const dispatch = useDispatch();
 
   return (
     <div className="flex justify-between items-center">
       <div className="flex items-center gap-1">
-        <div className="h-8 w-7 flex items-center justify-center rounded hover:bg-[#F3F3F3]">
+        <button
+          onClick={toggleSidebar}
+          className="h-8 w-7 flex items-center justify-center rounded hover:bg-[#F3F3F3]"
+        >
           <RxHamburgerMenu className="text-[--icon-color] w-[20px] h-[20px]" />
-        </div>
+        </button>
         <input
           maxLength={64}
           className="h-8 text-xl font-medium p-1.5 flex items-center rounded hover:bg-[#F3F3F3]"

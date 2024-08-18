@@ -32,9 +32,9 @@ export const TaskForm = () => {
         onKeyDown={(e) => {
           console.log(e.key); //TODO: Show details TaskForm when User press shift + enter
         }}
-        onBlur={() => {
-          setIsInputFocused(false); //TODO: figure out alternate way to setInputFoucsed off when click outside of input box
-        }}
+        // onBlur={() => {
+        //   setIsInputFocused(false); //TODO: figure out alternate way to setInputFoucsed off when click outside of input box
+        // }}
         placeholder="+ Add task"
         className="w-full h-full placeholder:text-sm placeholder:font-medium outline-none rounded-md bg-transparent px-4 text-sm"
       />
