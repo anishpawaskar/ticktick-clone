@@ -4,10 +4,23 @@ import { VscPreview } from "react-icons/vsc";
 import { PiLineVerticalBold } from "react-icons/pi";
 import { VscCalendar } from "react-icons/vsc";
 import { RiFlag2Line } from "react-icons/ri";
+import { MdCheck } from "react-icons/md";
 import { TaskMarkdownEditor } from "../TaskMarkdownEditor";
+import {
+  priorityIcons,
+  TASK_PRIORITY,
+} from "../TaskDashboard/components/TaskForm/taskForm.constant";
+import { Modal } from "../Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { selectActiveModal, toggleModal } from "../Modal/modalSlice";
 
 export const TaskMarkdownController = () => {
+  const { activeModal } = useSelector(selectActiveModal);
+  const dispatch = useDispatch();
+
   const isEditMode = true;
+  const currentPriority = "None";
+
   return (
     <div className="fixed top-0 left-0 w-full h-full flex flex-col z-50 bg-white">
       <div className="pt-5 px-4 pb-4 border-b  flex items-center gap-2">
@@ -36,11 +49,49 @@ export const TaskMarkdownController = () => {
               </p>
             </div>
           </div>
-          <div className="flex items-center relative">
-            <button>
-              <RiFlag2Line className="text-[--icon-color] w-5 h-5" />
-            </button>
-          </div>
+          <Modal>
+            <div className="flex items-center relative">
+              <button onClick={() => dispatch(toggleModal("priority"))}>
+                <RiFlag2Line className="text-[--icon-color] w-5 h-5" />
+              </button>
+
+              {activeModal === "priority" && (
+                <div className="absolute top-[30px] left-[-138px] z-[200] shadow-2xl border rounded-md bg-white p-1 w-40">
+                  {TASK_PRIORITY.map((item) => {
+                    const IconComponent = priorityIcons[item.icon];
+
+                    return (
+                      <button
+                        className="flex items-center justify-between h-8 px-2 w-full rounded hover:bg-[#F3F3F3] text-[13px]"
+                        key={item.id}
+                      >
+                        <div className="flex items-center gap-2">
+                          <IconComponent
+                            style={{ color: item.color }}
+                            className="w-5 h-5"
+                          />
+                          <span
+                            style={{
+                              color:
+                                currentPriority === item.name
+                                  ? "#4772fa"
+                                  : "#000",
+                            }}
+                            className="flex flex-auto"
+                          >
+                            {item.name}
+                          </span>
+                        </div>
+                        {currentPriority === item.name && (
+                          <MdCheck className="h-4 w-4 text-[#4772fa]" />
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </Modal>
         </div>
       </div>
       <TaskMarkdownEditor />
