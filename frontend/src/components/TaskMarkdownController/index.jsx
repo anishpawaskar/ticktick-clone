@@ -4,12 +4,13 @@ import { VscPreview } from "react-icons/vsc";
 import { PiLineVerticalBold } from "react-icons/pi";
 import { VscCalendar } from "react-icons/vsc";
 import { RiFlag2Line } from "react-icons/ri";
+import { TaskMarkdownEditor } from "../TaskMarkdownEditor";
 
 export const TaskMarkdownController = () => {
   const isEditMode = true;
   return (
-    <div className="fixed top-0 left-0 w-full h-full z-50 bg-white">
-      <div className="pt-5 px-4 pb-2 border-b  flex items-center gap-2">
+    <div className="fixed top-0 left-0 w-full h-full flex flex-col z-50 bg-white">
+      <div className="pt-5 px-4 pb-4 border-b  flex items-center gap-2">
         <div className="flex items-center gap-2">
           <button>
             <RxCross2 className="text-[--icon-color] h-5 w-5" />
@@ -35,13 +36,14 @@ export const TaskMarkdownController = () => {
               </p>
             </div>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center relative">
             <button>
               <RiFlag2Line className="text-[--icon-color] w-5 h-5" />
             </button>
           </div>
         </div>
       </div>
+      <TaskMarkdownEditor />
     </div>
   );
 };

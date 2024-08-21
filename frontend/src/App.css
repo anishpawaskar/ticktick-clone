@@ -8,3 +8,7 @@
 :root {
   --icon-color: #8f8f8f;
 }
+
+.cm-editor {
+  @apply h-full;
+}
