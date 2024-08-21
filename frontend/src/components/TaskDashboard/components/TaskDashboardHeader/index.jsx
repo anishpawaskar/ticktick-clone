@@ -14,15 +14,20 @@ import {
   MODAL_LIST_1,
   MODAL_LIST_2,
 } from "../../taskDashboard.constant";
+import { selectTask, toggleControlPanel } from "../../../../store/taskSlice";
 
 export const TaskDashboardHeader = ({ title }) => {
   const { activeModal } = useSelector(selectActiveModal);
+  const { isControlPanelVisible } = useSelector(selectTask);
   const dispatch = useDispatch();
 
   return (
     <div className="flex justify-between items-center">
       <div className="flex items-center gap-1">
-        <button className="h-8 w-7 flex items-center justify-center rounded hover:bg-[#F3F3F3]">
+        <button
+          onClick={() => dispatch(toggleControlPanel(!isControlPanelVisible))}
+          className="h-8 w-7 flex items-center justify-center rounded hover:bg-[#F3F3F3]"
+        >
           <RxHamburgerMenu className="text-[--icon-color] w-[20px] h-[20px]" />
         </button>
         <input
