@@ -4,6 +4,7 @@ import { OptionsPanel } from "./OptionsPanel";
 import { Sidebar } from "./Sidebar";
 import { TaskControlPanel } from "./TaskControlPanel";
 import { TaskDashboard } from "./TaskDashboard";
+import { TaskMarkdownController } from "./TaskMarkdownController";
 
 export const Task = () => {
   const { currentPage } = useSelector(selectAuth);
@@ -18,7 +19,8 @@ export const Task = () => {
       <div className="flex flex-col flex-auto p-4 border">
         <TaskDashboard />
       </div>
-      <div className="hidden lg:flex lg:h-full lg:bg-slate-600 lg:w-[30%]"></div>
+      {/* <div className="hidden lg:flex lg:h-full lg:bg-slate-600 lg:w-[30%]"></div> */}
+      <TaskMarkdownController />
     </div>
   );
 };
