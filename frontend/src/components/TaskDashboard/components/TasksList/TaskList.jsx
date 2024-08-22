@@ -3,9 +3,11 @@ import { LuListTree } from "react-icons/lu";
 import { MdKeyboardArrowRight, MdKeyboardArrowDown } from "react-icons/md";
 import { formatDate } from "../../../utils/formatDate";
 import { TaskMarkdownController } from "../../../TaskMarkdownController";
+import { useGetScreenSize } from "../../../../cusstomHooks/useGetScreeeSize";
 
 export const TaskList = ({ task, selectedTask, dispatch, getSelectedTask }) => {
   const [isTasksAccordianOpen, setIsTaskAccordianOpen] = useState(false);
+  const [screenSize] = useGetScreenSize();
   const date = formatDate(task.startDate);
 
   return (
@@ -50,7 +52,9 @@ export const TaskList = ({ task, selectedTask, dispatch, getSelectedTask }) => {
       {task.items &&
         isTasksAccordianOpen &&
         task.items.map((task) => <TaskList task={task} key={task.id} />)}
-      {selectedTask === task.id && <TaskMarkdownController />}
+      {selectedTask === task.id && screenSize.width < 950 && (
+        <TaskMarkdownController />
+      )}
     </>
   );
 };

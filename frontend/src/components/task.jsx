@@ -5,9 +5,13 @@ import { Sidebar } from "./Sidebar";
 import { TaskControlPanel } from "./TaskControlPanel";
 import { TaskDashboard } from "./TaskDashboard";
 import { TaskMarkdownController } from "./TaskMarkdownController";
+import { selectTask } from "../store/taskSlice";
+import { useGetScreenSize } from "../cusstomHooks/useGetScreeeSize";
 
 export const Task = () => {
   const { currentPage } = useSelector(selectAuth);
+  const { selectedTask } = useSelector(selectTask);
+  const [screenSize] = useGetScreenSize();
 
   return (
     <div className="h-screen flex">
@@ -19,8 +23,10 @@ export const Task = () => {
       <div className="flex flex-col flex-auto p-4 border">
         <TaskDashboard />
       </div>
-      {/* <div className="hidden lg:flex lg:h-full lg:bg-slate-600 lg:w-[30%]"></div> */}
-      <TaskMarkdownController />
+      {!selectedTask && (
+        <div className="hidden lg:flex lg:h-full lg:bg-white lg:w-[30%]"></div>
+      )}
+      {selectedTask && screenSize.width > 950 && <TaskMarkdownController />}
     </div>
   );
 };

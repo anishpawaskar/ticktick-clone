@@ -24,7 +24,7 @@ export const TaskMarkdownController = () => {
   const currentPriority = "None";
 
   // FIX: height of a TaskMarkdownController for xs-[screen] it should grow upto 700px and initially it should be 350px
-  // FIX: This component is being render two time fix it
+
   return (
     <div
       className={`fixed top-0 left-0 w-full h-full flex flex-col z-50 bg-white ${
