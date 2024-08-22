@@ -12,3 +12,27 @@
 .cm-editor {
   @apply h-full;
 }
+
+.react-markdown-preview h1 {
+  @apply text-2xl sm:text-[2em] font-bold;
+}
+
+.react-markdown-preview h2 {
+  @apply text-xl sm:text-[1.5em] font-bold;
+}
+
+.react-markdown-preview h3 {
+  @apply text-lg sm:text-[1.17em] font-bold;
+}
+
+.react-markdown-preview h4 {
+  @apply text-base sm:text-[1em] font-bold;
+}
+
+.react-markdown-preview h5 {
+  @apply text-sm sm:text-[0.83em] font-bold;
+}
+
+.react-markdown-preview h6 {
+  @apply text-xs sm:text-[0.67em] font-bold;
+}

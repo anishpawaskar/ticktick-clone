@@ -6,6 +6,7 @@ import { VscCalendar } from "react-icons/vsc";
 import { RiFlag2Line } from "react-icons/ri";
 import { MdCheck } from "react-icons/md";
 import { TaskMarkdownEditor } from "../TaskMarkdownEditor";
+import { TaskMarkdownPreview } from "../TaskMarkdownPreview";
 import {
   priorityIcons,
   TASK_PRIORITY,
@@ -14,13 +15,15 @@ import { Modal } from "../Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { selectActiveModal, toggleModal } from "../Modal/modalSlice";
 import { getSelectedTask, selectTask } from "../../store/taskSlice";
+import { useState } from "react";
 
 export const TaskMarkdownController = () => {
+  const [isEditMode, setIsEditMode] = useState(true);
+
   const { activeModal } = useSelector(selectActiveModal);
   const { selectedTask } = useSelector(selectTask);
   const dispatch = useDispatch();
 
-  const isEditMode = true;
   const currentPriority = "None";
 
   // FIX: height of a TaskMarkdownController for xs-[screen] it should grow upto 700px and initially it should be 350px
@@ -40,11 +43,11 @@ export const TaskMarkdownController = () => {
             <RxCross2 className="text-[--icon-color] h-5 w-5" />
           </button>
           {isEditMode ? (
-            <button>
+            <button onClick={() => setIsEditMode(false)}>
               <FaRegEdit className="text-[--icon-color] h-5 w-5" />
             </button>
           ) : (
-            <button>
+            <button onClick={() => setIsEditMode(true)}>
               <VscPreview className="text-[--icon-color] h-5 w-5" />
             </button>
           )}
@@ -105,7 +108,7 @@ export const TaskMarkdownController = () => {
           </Modal>
         </div>
       </div>
-      <TaskMarkdownEditor />
+      {isEditMode ? <TaskMarkdownEditor /> : <TaskMarkdownPreview />}
     </div>
   );
 };
