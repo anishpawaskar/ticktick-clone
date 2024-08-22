@@ -3,11 +3,16 @@ import { LuListTree } from "react-icons/lu";
 import { MdKeyboardArrowRight, MdKeyboardArrowDown } from "react-icons/md";
 import { formatDate } from "../../../utils/formatDate";
 import { TaskMarkdownController } from "../../../TaskMarkdownController";
-import { useGetScreenSize } from "../../../../cusstomHooks/useGetScreeeSize";
 
-export const TaskList = ({ task, selectedTask, dispatch, getSelectedTask }) => {
+export const TaskList = ({
+  task,
+  selectedTask,
+  dispatch,
+  getSelectedTask,
+  screenSize,
+}) => {
   const [isTasksAccordianOpen, setIsTaskAccordianOpen] = useState(false);
-  const [screenSize] = useGetScreenSize();
+
   const date = formatDate(task.startDate);
 
   return (
