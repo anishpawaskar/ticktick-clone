@@ -29,7 +29,7 @@ export const TaskMarkdownController = () => {
     <div
       className={`fixed top-0 left-0 w-full h-full flex flex-col z-50 bg-white ${
         selectedTask !== "" ? "xs:flex" : "hidden"
-      } xs:h-[350px] xs:max-h-[700px] xs:overflow-auto xs:transition-all xs:w-[350px] xs:shadow-2xl xs:rounded-md xs:top-[155px] xs:absolute sm:w-[500px] lg:block lg:static lg:max-h-full lg:h-full lg:w-[30%]`}
+      } xs:h-[350px] xs:max-h-[700px] xs:overflow-auto xs:transition-all xs:w-[350px] xs:shadow-2xl xs:rounded-md xs:top-[155px] xs:absolute sm:w-[500px] lg:block lg:static lg:max-h-full lg:h-full lg:w-[30%] lg:shadow-none`}
     >
       <div className="pt-5 px-4 pb-4 border-b  flex items-center gap-2">
         <div className="flex items-center gap-2">
