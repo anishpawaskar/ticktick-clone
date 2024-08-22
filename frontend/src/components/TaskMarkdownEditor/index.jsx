@@ -7,7 +7,7 @@ import { markdownTheme } from "./markdownEditorTheme";
 export const TaskMarkdownEditor = () => {
   return (
     <CodeMirror
-      className="px-4 py-5 w-full h-full"
+      className="px-4 py-5 w-full h-full xs:h-[350px] xs:max-h-[700px] xs:overflow-auto xs:transition-all"
       value="# abc"
       theme={markdownTheme}
       extensions={[markdown()]}

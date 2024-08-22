@@ -4,6 +4,7 @@ const taskSlice = createSlice({
   name: "task",
   initialState: {
     isControlPanelVisible: true,
+    selectedTask: "",
   },
   reducers: {
     toggleControlPanel: (state, { payload }) => {
@@ -16,10 +17,14 @@ const taskSlice = createSlice({
     closeControlPanel: (state) => {
       state.isControlPanelVisible = false;
     },
+    getSelectedTask: (state, { payload }) => {
+      state.selectedTask = payload;
+    },
   },
 });
 
-export const { toggleControlPanel, closeControlPanel } = taskSlice.actions;
+export const { toggleControlPanel, closeControlPanel, getSelectedTask } =
+  taskSlice.actions;
 export const selectTask = (state) => state.task;
 
 export default taskSlice.reducer;

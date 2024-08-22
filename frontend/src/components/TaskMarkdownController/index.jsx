@@ -13,19 +13,30 @@ import {
 import { Modal } from "../Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { selectActiveModal, toggleModal } from "../Modal/modalSlice";
+import { getSelectedTask, selectTask } from "../../store/taskSlice";
 
 export const TaskMarkdownController = () => {
   const { activeModal } = useSelector(selectActiveModal);
+  const { selectedTask } = useSelector(selectTask);
   const dispatch = useDispatch();
 
   const isEditMode = true;
   const currentPriority = "None";
 
+  // FIX: height of a TaskMarkdownController for xs-[screen] it should grow upto 700px and initially it should be 350px
+  // FIX: This component is being render two time fix it
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex flex-col z-50 bg-white">
+    <div
+      className={`fixed top-0 left-0 w-full h-full flex flex-col z-50 bg-white ${
+        selectedTask !== "" ? "xs:flex" : "hidden"
+      } xs:h-[350px] xs:max-h-[700px] xs:overflow-auto xs:transition-all xs:w-[350px] xs:shadow-2xl xs:rounded-md xs:top-[155px] xs:absolute sm:w-[500px] lg:block lg:static lg:max-h-full lg:h-full lg:w-[30%]`}
+    >
       <div className="pt-5 px-4 pb-4 border-b  flex items-center gap-2">
         <div className="flex items-center gap-2">
-          <button>
+          <button
+            onClick={() => dispatch(getSelectedTask(""))}
+            className="xs:hidden"
+          >
             <RxCross2 className="text-[--icon-color] h-5 w-5" />
           </button>
           {isEditMode ? (
