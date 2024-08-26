@@ -22,7 +22,7 @@ export const getMonthStr = (month) => {
       return idx === month - 1;
     }
   });
-  // console.log("from filter", monthArr);
+
   return MONTHS[month - 1];
 };
 
@@ -50,7 +50,6 @@ export const formateDate = (year, month, day) => {
 };
 
 export const formatDateInUTC = (date) => {
-  console.log("date", date);
   const year = date.getUTCFullYear();
   const month = String(date.getUTCMonth() + 1).padStart(2, "0");
   const day = String(date.getUTCDate()).padStart(2, "0");
@@ -116,7 +115,6 @@ export const getPreviousMonth = (month, year) => {
 export const getNextMonth = (month, year) => {
   const nextMonth = month < 12 ? month + 1 : month;
   const nextYear = month !== 0 ? year : year + 1;
-  console.log;
 
   return { nextMonth, nextYear };
 };
@@ -173,39 +171,24 @@ export const getDates = (month, year, date) => {
   return dates;
 };
 
-export const setTomorrowsDate = (date) => {
-  const formatedUtcDate = formatDateInUTC(date);
-  const d = new Date(formatedUtcDate);
-  const month = getMonth(d);
-  const year = getYear(d);
-  const day = getDay(d);
+export const setTomorrowsDate = () => {
+  const currentDate = new Date();
+  const currentFormatedDate = formatDateInUTC(currentDate);
+  const day = getDay(currentFormatedDate);
+  const month = getMonth(currentFormatedDate);
+  const year = getYear(currentFormatedDate);
 
-  const monthCount = month === 12 ? 0 : month;
-
-  const daysInMonth = getDaysInMonth(month, year);
-  const { nextMonth, nextYear } = getNextMonth(monthCount, year);
-
-  if (
-    daysInMonth === day &&
-    year !== nextYear &&
-    nextMonth === 1 &&
-    month === 12
-  ) {
-    return formatDateInUTC(new Date(Date.UTC(nextYear, nextMonth - 1, 1)));
-  } else if (daysInMonth === day && year === nextYear) {
-    return formatDateInUTC(new Date(`${nextYear}-${nextMonth}-${1}`));
-  }
   return formatDateInUTC(new Date(`${year}-${month}-${day + 1}`));
 };
 
 export const setNextWeekDate = (date) => {
-  const formatedUtcDate = formatDateInUTC(date);
-  const d = new Date(formatedUtcDate);
+  const currentDate = new Date();
+  const currentFormatedDate = formatDateInUTC(currentDate);
+  const d = new Date(currentFormatedDate);
   const sevenDays = d.valueOf() + 7 * 24 * 60 * 60 * 1000;
   const day = getDay(sevenDays);
   const month = getMonth(sevenDays);
   const year = getYear(sevenDays);
-  console.log({ day, month, year });
 
   return formatDateInUTC(new Date(`${year}-${month}-${day}`));
 };
