@@ -135,7 +135,7 @@ export const DatePicker = () => {
   };
 
   return (
-    <div className="bg-white shadow-2xl border py-4 w-[260px] rounded-md flex flex-col gap-4">
+    <div className="bg-white shadow-2xl border py-4 w-[260px] rounded-lg flex flex-col gap-4">
       <div className="flex items-center bg-[#F3F3F3] h-[30px] p-[2px] rounded-md mx-4">
         <button className="flex flex-auto justify-center items-center text-[13px] bg-white h-full rounded-md">
           Date

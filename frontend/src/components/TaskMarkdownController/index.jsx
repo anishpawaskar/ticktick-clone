@@ -16,9 +16,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectActiveModal, toggleModal } from "../Modal/modalSlice";
 import { getSelectedTask, selectTask } from "../../store/taskSlice";
 import { useState } from "react";
+import { DatePicker } from "../DatePicker";
 
 export const TaskMarkdownController = () => {
   const [isEditMode, setIsEditMode] = useState(true);
+  const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
 
   const { activeModal } = useSelector(selectActiveModal);
   const { selectedTask } = useSelector(selectTask);
@@ -56,12 +58,28 @@ export const TaskMarkdownController = () => {
           <div className="flex items-center flex-auto gap-[2px]">
             <input type="checkbox" name="complete-task" className="w-4 h-4" />
             <PiLineVerticalBold className="text-[--icon-color]" />
-            <div className="mb-[1px] flex gap-1">
-              <VscCalendar className="text-[#4772fa] h-[18px] w-[18px]" />
-              <p className="text-[#4772fa] text-[13px] truncate">
-                a month later, Sep 27
-              </p>
+            <div className="relative">
+              <button
+                onClick={() => setIsDatePickerVisible(true)}
+                className="mb-[1px] flex gap-1"
+              >
+                <VscCalendar className="text-[#4772fa] h-[18px] w-[18px]" />
+                <p className="text-[#4772fa] text-[13px] truncate">
+                  a month later, Sep 27
+                </p>
+              </button>
+              {isDatePickerVisible && (
+                <div className="absolute z-[150] left-[-4px] top-[25px]">
+                  <DatePicker />
+                </div>
+              )}
             </div>
+            {isDatePickerVisible && (
+              <div
+                onClick={() => setIsDatePickerVisible(false)}
+                className="w-full h-full absolute top-0 left-0 z-10"
+              ></div>
+            )}
           </div>
           <Modal>
             <div className="flex items-center relative">
