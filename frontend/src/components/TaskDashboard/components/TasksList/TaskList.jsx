@@ -3,6 +3,7 @@ import { LuListTree } from "react-icons/lu";
 import { MdKeyboardArrowRight, MdKeyboardArrowDown } from "react-icons/md";
 import { formatDate } from "../../../utils/formatDate";
 import { TaskMarkdownController } from "../../../TaskMarkdownController";
+import { DatePicker } from "../../../DatePicker";
 
 export const TaskList = ({
   task,
@@ -12,6 +13,7 @@ export const TaskList = ({
   screenSize,
 }) => {
   const [isTasksAccordianOpen, setIsTaskAccordianOpen] = useState(false);
+  const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
 
   const date = formatDate(task.startDate);
 
@@ -48,9 +50,20 @@ export const TaskList = ({
             <LuListTree className="text-xs text-[--icon-color]" />
           )}
           {task?.startDate && (
-            <p style={{ color: "#4772fa" }} className="text-xs">
-              {date}
-            </p>
+            <div className="relative">
+              <button
+                onClick={() => setIsDatePickerVisible(true)}
+                style={{ color: "#4772fa" }}
+                className="text-xs"
+              >
+                {date}
+              </button>
+              {isDatePickerVisible && (
+                <div className="absolute z-[150] right-[-16px] top-5">
+                  <DatePicker />
+                </div>
+              )}
+            </div>
           )}
         </div>
       </li>
@@ -59,6 +72,12 @@ export const TaskList = ({
         task.items.map((task) => <TaskList task={task} key={task.id} />)}
       {selectedTask === task.id && screenSize.width < 950 && (
         <TaskMarkdownController />
+      )}
+      {isDatePickerVisible && (
+        <div
+          onClick={() => setIsDatePickerVisible(false)}
+          className="w-full h-full absolute top-0 left-0 z-[100]"
+        ></div>
       )}
     </>
   );
