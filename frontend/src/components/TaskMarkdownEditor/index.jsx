@@ -4,6 +4,7 @@ import { markdownTheme } from "./markdownEditorTheme";
 
 export const TaskMarkdownEditor = () => {
   // TODO: When code editor gets mount it should be focused
+  // TODO: Component should be closed when task selected and window resize
   return (
     <CodeMirror
       className="px-4 py-5 w-full h-full xs:h-[350px] xs:max-h-[700px] xs:overflow-auto xs:transition-all"
@@ -18,3 +19,6 @@ export const TaskMarkdownEditor = () => {
     />
   );
 };
+
+// TODO: Create object file which contains all of constant
+// TODO: Component static object isolate
