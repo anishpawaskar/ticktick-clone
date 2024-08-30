@@ -1,7 +1,7 @@
 import {
   LIST_DATA,
   TAGS_DATA,
-} from "./components/TaskListCarousel/taskListCarousel.constants";
+} from "./components/TaskListAccordion/taskListAccordion.constants";
 import { TaskControlPanelPresentation } from "./Presentation";
 
 export const TaskControlPanel = () => {

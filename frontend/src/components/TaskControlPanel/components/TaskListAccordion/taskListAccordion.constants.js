@@ -5,7 +5,8 @@ export const LIST_DATA = [
     isPin: false,
     isArchive: false,
     isDelete: false,
-    color: "",
+    color: "#35D870",
+    count: 7,
   },
   {
     id: 2,

@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 import { TaskControlList } from "./components/TaskControlList";
-import { TaskListCarousel } from "./components/TaskListCarousel";
+import { TaskListAccordion } from "./components/TaskListAccordion";
 import { selectTask } from "../../store/taskSlice";
+import { TAGS_DATA } from "./components/TaskListAccordion/taskListAccordion.constants";
 
 export const TaskControlPanelPresentation = ({ lists, tags }) => {
   const { isControlPanelVisible } = useSelector(selectTask);
@@ -14,11 +15,12 @@ export const TaskControlPanelPresentation = ({ lists, tags }) => {
         isControlPanelVisible ? "xs:hidden" : "xs:block"
       }  ${
         isControlPanelVisible ? "sm:block" : "sm:hidden"
-      } sm:static sm:w-56 border`}
+      } sm:static sm:w-[305px] border`}
     >
       <TaskControlList listType="overview" />
       <hr />
-      {/* <TaskListCarousel title="Lists" lists={lists} /> */}
+      <TaskListAccordion title="Lists" lists={lists} />
+      <TaskListAccordion title="Tags" lists={TAGS_DATA} />
     </div>
   );
 };
