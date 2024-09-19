@@ -1,46 +1,43 @@
-import { MdCheckBox } from "react-icons/md";
-import { SlCalender } from "react-icons/sl";
-import { TbClover } from "react-icons/tb";
-import { ImRadioChecked } from "react-icons/im";
-import { RiMapPinTimeFill } from "react-icons/ri";
+import { FaCheckSquare } from "react-icons/fa";
+import { IoCalendar, IoSearchOutline } from "react-icons/io5";
+import { RiRefreshLine } from "react-icons/ri";
+import { GoBellFill } from "react-icons/go";
+import { BsQuestionCircleFill } from "react-icons/bs";
 
-export const USER_SELECTED_FEATURES = [
+export const USER_FEATURES = [
   {
     id: 1,
     name: "Task",
+    icon: FaCheckSquare,
     isSelected: true,
-    icon: "MdCheckBox",
   },
   {
     id: 2,
     name: "Calendar",
-    isSelected: true,
-    icon: "SlCalender",
+    icon: IoCalendar,
+    isSelected: false,
   },
   {
     id: 3,
-    name: "Eisenhower Matrix",
-    isSelected: false,
-    icon: "TbClover",
-  },
-  {
-    id: 4,
-    name: "Pomodoro",
-    isSelected: false,
-    icon: "ImRadioChecked",
-  },
-  {
-    id: 5,
-    name: "Habit Tracker",
-    isSelected: false,
-    icon: "RiMapPinTimeFill",
+    name: "Search",
+    icon: IoSearchOutline,
   },
 ];
 
-export const iconsComponents = {
-  MdCheckBox,
-  SlCalender,
-  TbClover,
-  ImRadioChecked,
-  RiMapPinTimeFill,
-};
+export const APP_FEATURES = [
+  {
+    id: 1,
+    name: "Refresh",
+    icon: RiRefreshLine,
+  },
+  {
+    id: 2,
+    name: "Notification",
+    icon: GoBellFill,
+  },
+  {
+    id: 3,
+    name: "More",
+    icon: BsQuestionCircleFill,
+  },
+];
