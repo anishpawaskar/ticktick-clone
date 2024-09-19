@@ -1,6 +1,6 @@
 import { TaskDashboardHeader } from "./components/TaskDashboardHeader";
 import { TaskForm } from "./components/TaskForm";
-import { Tasks } from "./components/TasksList";
+import { Tasks } from "./components/Tasks";
 
 export const TaskDashboard = () => {
   return (
