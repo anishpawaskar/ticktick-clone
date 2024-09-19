@@ -1,9 +1,18 @@
-import {
-  LIST_DATA,
-  TAGS_DATA,
-} from "./components/TaskListAccordion/taskListAccordion.constants";
+import { useSelector } from "react-redux";
 import { TaskControlPanelPresentation } from "./Presentation";
+import { selectTask } from "../../store/taskSlice";
+import { TASK_CONTROLS } from "./taskControlPanel.constatns";
 
 export const TaskControlPanel = () => {
-  return <TaskControlPanelPresentation lists={LIST_DATA} tags={TAGS_DATA} />;
+  const { isControlPanelVisible } = useSelector(selectTask);
+  const overviewList = TASK_CONTROLS.filter(
+    (control) => control.category === "overview"
+  );
+
+  return (
+    <TaskControlPanelPresentation
+      isControlPanelVisible={isControlPanelVisible}
+      overviewList={overviewList}
+    />
+  );
 };

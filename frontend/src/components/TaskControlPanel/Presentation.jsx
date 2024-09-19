@@ -1,12 +1,13 @@
 import { useSelector } from "react-redux";
 import { TaskControlList } from "./components/TaskControlList";
-import { TaskListAccordion } from "./components/TaskListAccordion";
 import { selectTask } from "../../store/taskSlice";
-import { TAGS_DATA } from "./components/TaskListAccordion/taskListAccordion.constants";
+import { TASK_CONTROLS } from "./taskControlPanel.constatns";
 
-export const TaskControlPanelPresentation = ({ lists, tags }) => {
-  const { isControlPanelVisible } = useSelector(selectTask);
-  // FIX: handle controlpanel visibility for small devices on when state changes
+export const TaskControlPanelPresentation = ({
+  isControlPanelVisible,
+  overviewList,
+}) => {
+  // TODO: when screen resize is less than 630 and if window resize then hide control panel
   return (
     <div
       className={`${
@@ -15,12 +16,10 @@ export const TaskControlPanelPresentation = ({ lists, tags }) => {
         isControlPanelVisible ? "xs:hidden" : "xs:block"
       }  ${
         isControlPanelVisible ? "sm:block" : "sm:hidden"
-      } sm:static sm:w-[305px] border`}
+      } sm:static sm:w-[213px] sm:shadow-none border-r`}
     >
-      <TaskControlList listType="overview" />
+      <TaskControlList lists={overviewList} />
       <hr />
-      <TaskListAccordion title="Lists" lists={lists} />
-      <TaskListAccordion title="Tags" lists={TAGS_DATA} />
     </div>
   );
 };

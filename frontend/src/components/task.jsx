@@ -17,10 +17,10 @@ export const Task = () => {
     <div className="h-screen flex">
       {currentPage === "/signup" && <OptionsPanel />}
       <Sidebar />
-      <div className="flex overflow-hidden">
+      <div className="flex">
         <TaskControlPanel />
       </div>
-      <div className="flex flex-col flex-auto p-4 border">
+      <div className="flex flex-col flex-auto p-4 border-r">
         <TaskDashboard />
       </div>
       {!selectedTask && (
