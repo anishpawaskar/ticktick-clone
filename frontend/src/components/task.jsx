@@ -20,7 +20,7 @@ export const Task = () => {
       <div className="flex">
         <TaskControlPanel />
       </div>
-      <div className="flex flex-col flex-auto p-4 border-r">
+      <div className="flex flex-auto border-r">
         <TaskDashboard />
       </div>
       {!selectedTask && (
