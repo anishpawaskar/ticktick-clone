@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { TaskControlList } from "./components/TaskControlList";
 import { selectTask } from "../../store/taskSlice";
 import { TASK_CONTROLS } from "./taskControlPanel.constatns";
+import { TaskControlPanelAccordion } from "./components/TaskControlPanelAccordion";
 
 export const TaskControlPanelPresentation = ({
   isControlPanelVisible,
@@ -19,7 +20,8 @@ export const TaskControlPanelPresentation = ({
       } sm:static sm:w-[213px] sm:shadow-none border-r`}
     >
       <TaskControlList lists={overviewList} />
-      <hr />
+      <hr className="my-4" />
+      <TaskControlPanelAccordion title="Lists" />
     </div>
   );
 };

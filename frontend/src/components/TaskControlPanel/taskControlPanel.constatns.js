@@ -1,8 +1,3 @@
-import { CiCalendarDate } from "react-icons/ci";
-import { HiOutlineInbox } from "react-icons/hi2";
-import { MdCheckBox } from "react-icons/md";
-import { RiDeleteBin6Line } from "react-icons/ri";
-
 export const TASK_CONTROLS = [
   {
     id: 1,
@@ -86,9 +81,55 @@ export const TASK_CONTROLS = [
   },
 ];
 
-export const iconsComponentList = {
-  CiCalendarDate,
-  HiOutlineInbox,
-  MdCheckBox,
-  RiDeleteBin6Line,
-};
+export const LISTS_DATA = [
+  {
+    id: 1,
+    name: "Not Smart",
+    isPin: false,
+    isArchive: false,
+    isDelete: false,
+    color: "#35D870",
+    count: 7,
+  },
+  {
+    id: 2,
+    name: "todo",
+    isPin: false,
+    isArchive: false,
+    isDelete: false,
+    color: "",
+  },
+];
+
+export const LISTS_MODAL_ACTIONS = [
+  {
+    id: 1,
+    name: "Edit",
+    action: "edit",
+  },
+  {
+    id: 2,
+    name: "Pin",
+    action: "pin",
+  },
+  {
+    id: 3,
+    name: "Duplicate",
+    action: "Duplicate",
+  },
+  {
+    id: 4,
+    name: "Share",
+    action: "share",
+  },
+  {
+    id: 5,
+    name: "Archive",
+    action: "archive",
+  },
+  {
+    id: 6,
+    name: "Delete",
+    action: "delete",
+  },
+];
