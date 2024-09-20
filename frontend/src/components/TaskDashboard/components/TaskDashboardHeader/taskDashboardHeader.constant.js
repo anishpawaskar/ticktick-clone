@@ -10,6 +10,7 @@ import { RiPrinterLine } from "react-icons/ri";
 
 export const SORT_DATA = [
   {
+    id: 10,
     title: "Group by",
     icon: MdOutlineComputer,
     items: [
@@ -36,6 +37,7 @@ export const SORT_DATA = [
     ],
   },
   {
+    id: 20,
     title: "Sort by",
     icon: BsSortDown,
     items: [
@@ -56,7 +58,8 @@ export const SORT_DATA = [
         name: "Tag",
       },
       {
-        id: "Priority",
+        id: 5,
+        name: "Priority",
       },
     ],
   },

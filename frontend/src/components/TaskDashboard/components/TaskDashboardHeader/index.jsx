@@ -8,6 +8,7 @@ import { selectTask, toggleControlPanel } from "../../../../store/taskSlice";
 
 export const TaskDashboardHeader = ({ title }) => {
   const [isInputVisible, setIsInputVisible] = useState(false);
+  const [isDropdownVisible, setIsDropdownVisible] = useState(null);
   const [isPopupVisible, setIsPopupVisible] = useState("");
   const [titleValue, setTitleValue] = useState(title);
   const titleInputRef = useRef(null);
@@ -61,10 +62,11 @@ export const TaskDashboardHeader = ({ title }) => {
         </button>
         {isPopupVisible === "sortTask" && (
           <DashboardHeaderPopup
-            //TODO: add nested popup
             key="sort popup"
             isPopupVisible={isPopupVisible}
             popupItems={SORT_DATA}
+            isDropdownVisible={isDropdownVisible}
+            setIsDropdownVisible={setIsDropdownVisible}
           />
         )}
         {isPopupVisible === "taskMenu" && (
@@ -77,8 +79,11 @@ export const TaskDashboardHeader = ({ title }) => {
       </div>
       {isPopupVisible && (
         <div
-          onClick={() => setIsPopupVisible("")}
-          className="absolute top-0 left-0 w-full h-full"
+          onClick={() => {
+            setIsPopupVisible("");
+            setIsDropdownVisible(null);
+          }}
+          className="absolute top-0 left-0 w-full h-full z-50"
         ></div>
       )}
     </header>
