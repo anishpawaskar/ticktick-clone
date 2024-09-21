@@ -5,6 +5,7 @@ import { FiCheck } from "react-icons/fi";
 import { useState } from "react";
 import { PRIORITY_ACTIONS } from "./taskMardownController.constant";
 import { DatePicker } from "../DatePicker";
+import { MarkdownEditor } from "./components/MarkdownEditor";
 
 export const TaskMarkdownController = () => {
   const [isPriorityDropdownVisible, setPriorityDropdown] = useState(false);
@@ -18,7 +19,7 @@ export const TaskMarkdownController = () => {
 
   return (
     <>
-      <div className="w-[21.45%] h-full block bg-white">
+      <div className="w-[21.45%] h-full bg-white flex flex-col">
         <div className="markdown-controller-header mt-2 py-[9px] px-5 border-b flex items-center justify-between">
           <div className="h-9 flex items-center">
             <input
@@ -46,7 +47,7 @@ export const TaskMarkdownController = () => {
               {isDatePickerVisible && (
                 <div
                   //TODO: set date of task
-                  className="absolute"
+                  className="absolute z-[60]"
                 >
                   <DatePicker />
                 </div>
@@ -108,6 +109,9 @@ export const TaskMarkdownController = () => {
               </ul>
             )}
           </div>
+        </div>
+        <div className="markdown-controller-main-section px-5 mt-2 py-[9px] overflow-auto">
+          <MarkdownEditor />
         </div>
       </div>
       {(isPriorityDropdownVisible || isDatePickerVisible) && (
