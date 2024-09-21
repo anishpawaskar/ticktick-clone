@@ -1,132 +1,124 @@
-import { RxCross2 } from "react-icons/rx";
-import { FaRegEdit } from "react-icons/fa";
-import { VscPreview } from "react-icons/vsc";
-import { PiLineVerticalBold } from "react-icons/pi";
-import { VscCalendar } from "react-icons/vsc";
-import { RiFlag2Line } from "react-icons/ri";
-import { MdCheck } from "react-icons/md";
-import { TaskMarkdownEditor } from "../TaskMarkdownEditor";
-import { TaskMarkdownPreview } from "../TaskMarkdownPreview";
-import {
-  priorityIcons,
-  TASK_PRIORITY,
-} from "../TaskDashboard/components/TaskForm/taskForm.constant";
-import { Modal } from "../Modal";
-import { useDispatch, useSelector } from "react-redux";
-import { selectActiveModal, toggleModal } from "../Modal/modalSlice";
-import { getSelectedTask, selectTask } from "../../store/taskSlice";
+import { PiLineVertical } from "react-icons/pi";
+import { IoCalendarOutline } from "react-icons/io5";
+import { TbFlag3Filled, TbFlag3 } from "react-icons/tb";
+import { FiCheck } from "react-icons/fi";
 import { useState } from "react";
+import { PRIORITY_ACTIONS } from "./taskMardownController.constant";
 import { DatePicker } from "../DatePicker";
 
 export const TaskMarkdownController = () => {
-  const [isEditMode, setIsEditMode] = useState(true);
+  const [isPriorityDropdownVisible, setPriorityDropdown] = useState(false);
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
+  const [priorityLevel, setPriorityLevel] = useState("NONE");
 
-  const { activeModal } = useSelector(selectActiveModal);
-  const { selectedTask } = useSelector(selectTask);
-  const dispatch = useDispatch();
-
-  const currentPriority = "None";
-
-  // FIX: height of a TaskMarkdownController for xs-[screen] it should grow upto 700px and initially it should be 350px
+  const priority = PRIORITY_ACTIONS.find(
+    (priority) => priority.level === priorityLevel
+  );
+  const PriorityFlagIcon = priority.icon;
 
   return (
-    <div
-      className={`fixed top-0 left-0 w-full h-full flex flex-col z-50 bg-white ${
-        selectedTask !== "" ? "xs:flex" : "hidden"
-      } xs:h-[350px] xs:max-h-[700px] xs:overflow-auto xs:transition-all xs:w-[350px] xs:shadow-2xl xs:rounded-md xs:top-[155px] xs:absolute sm:w-[500px] lg:block lg:static lg:max-h-full lg:h-full lg:w-[30%] lg:shadow-none`}
-    >
-      <div className="pt-5 px-4 pb-4 border-b  flex items-center gap-2">
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => dispatch(getSelectedTask(""))}
-            className="xs:hidden"
-          >
-            <RxCross2 className="text-[--icon-color] h-5 w-5" />
-          </button>
-          {isEditMode ? (
-            <button onClick={() => setIsEditMode(false)}>
-              <FaRegEdit className="text-[--icon-color] h-5 w-5" />
-            </button>
-          ) : (
-            <button onClick={() => setIsEditMode(true)}>
-              <VscPreview className="text-[--icon-color] h-5 w-5" />
-            </button>
-          )}
-        </div>
-        <div className="flex flex-auto items-center">
-          <div className="flex items-center flex-auto gap-[2px]">
-            <input type="checkbox" name="complete-task" className="w-4 h-4" />
-            <PiLineVerticalBold className="text-[--icon-color]" />
+    <>
+      <div className="w-[21.45%] h-full block bg-white">
+        <div className="markdown-controller-header mt-2 py-[9px] px-5 border-b flex items-center justify-between">
+          <div className="h-9 flex items-center">
+            <input
+              style={{ borderColor: priority.color }}
+              type="checkbox"
+              name="complete-task"
+              id="complete-task"
+              className="h-[15px] w-[15px] border rounded-sm appearance-none"
+            />
+
+            <PiLineVertical className="w-4 h-4 text-[--icon-color] opacity-60" />
             <div className="relative">
               <button
                 onClick={() => setIsDatePickerVisible(true)}
-                className="mb-[1px] flex gap-1"
+                className="flex items-center px-1 rounded hover:bg-[--light-white]"
               >
-                <VscCalendar className="text-[#4772fa] h-[18px] w-[18px]" />
-                <p className="text-[#4772fa] text-[13px] truncate">
-                  a month later, Sep 27
-                </p>
+                <IoCalendarOutline className="h-[18px] w-[18px] mr-1.5 text-[--icon-color] opacity-60" />
+                <span
+                  //TODO: write a function for showing date as tick tick
+                  className="text-[--text-gray-4] text-[15px] leading-[30px]"
+                >
+                  Due Date
+                </span>
               </button>
               {isDatePickerVisible && (
-                <div className="absolute z-[150] left-[-4px] top-[25px]">
+                <div
+                  //TODO: set date of task
+                  className="absolute"
+                >
                   <DatePicker />
                 </div>
               )}
             </div>
-            {isDatePickerVisible && (
-              <div
-                onClick={() => setIsDatePickerVisible(false)}
-                className="w-full h-full absolute top-0 left-0 z-10"
-              ></div>
-            )}
           </div>
-          <Modal>
-            <div className="flex items-center relative">
-              <button onClick={() => dispatch(toggleModal("priority"))}>
-                <RiFlag2Line className="text-[--icon-color] w-5 h-5" />
-              </button>
+          <div
+            //TODO: separate this into different component
+            className="h-full flex items-center relative"
+          >
+            <button
+              onClick={() => setPriorityDropdown(true)}
+              className="h-full rounded p-1 hover:bg-[--light-white]"
+            >
+              <PriorityFlagIcon
+                style={{ color: priority.color }}
+                className={`h-5 w-5 ${
+                  priorityLevel === "NONE" && "opacity-60"
+                }`}
+              />
+            </button>
+            {isPriorityDropdownVisible && (
+              <ul className="priority-dropdown p-1 absolute top-8 left-[-124px] bg-white shadow-2xl rounded-md border z-[60]">
+                {PRIORITY_ACTIONS.map((priority) => {
+                  const IconComponent = priority.icon;
+                  const isSelected = priority.level === priorityLevel;
 
-              {activeModal === "priority" && (
-                <div className="absolute top-[30px] left-[-138px] z-[200] shadow-2xl border rounded-md bg-white p-1 w-40">
-                  {TASK_PRIORITY.map((item) => {
-                    const IconComponent = priorityIcons[item.icon];
-
-                    return (
+                  return (
+                    <li className="w-[154px] h-[34px]">
                       <button
-                        className="flex items-center justify-between h-8 px-2 w-full rounded hover:bg-[#F3F3F3] text-[13px]"
-                        key={item.id}
+                        onClick={() => {
+                          setPriorityLevel(priority.level);
+                          setPriorityDropdown(false);
+                        }}
+                        className="flex items-center px-3 h-full w-full hover:bg-[--light-white] ease-in-out duration-150 rounded"
                       >
-                        <div className="flex items-center gap-2">
-                          <IconComponent
-                            style={{ color: item.color }}
-                            className="w-5 h-5"
-                          />
-                          <span
-                            style={{
-                              color:
-                                currentPriority === item.name
-                                  ? "#4772fa"
-                                  : "#000",
-                            }}
-                            className="flex flex-auto"
-                          >
-                            {item.name}
-                          </span>
-                        </div>
-                        {currentPriority === item.name && (
-                          <MdCheck className="h-4 w-4 text-[#4772fa]" />
+                        <IconComponent
+                          style={{ color: priority.color }}
+                          className={`h-5 w-5 mr-2 ${
+                            priority.level === "NONE" && "opacity-60"
+                          }`}
+                        />
+                        <span
+                          className={`flex-auto truncate text-left text-[13px] leading-5 ${
+                            isSelected
+                              ? "text-[--secondary-color]"
+                              : "text-[--text-gray]"
+                          }`}
+                        >
+                          {priority.name}
+                        </span>
+                        {isSelected && (
+                          <FiCheck className="h-[15px] w-[15px] text-[--secondary-color]" />
                         )}
                       </button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </Modal>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
-      {isEditMode ? <TaskMarkdownEditor /> : <TaskMarkdownPreview />}
-    </div>
+      {(isPriorityDropdownVisible || isDatePickerVisible) && (
+        <div
+          onClick={() => {
+            setPriorityDropdown(false);
+            setIsDatePickerVisible(false);
+          }}
+          className="absolute w-full h-full left-0 top-0 z-50"
+        ></div>
+      )}
+    </>
   );
 };
