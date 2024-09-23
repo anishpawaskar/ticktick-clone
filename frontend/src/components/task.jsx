@@ -4,14 +4,19 @@ import { OptionsPanel } from "./OptionsPanel";
 import { Sidebar } from "./Sidebar";
 import { TaskControlPanel } from "./TaskControlPanel";
 import { TaskDashboard } from "./TaskDashboard";
-import { TaskMarkdownController } from "./TaskMarkdownController";
 import { selectTask } from "../store/taskSlice";
 import { useGetScreenSize } from "../cusstomHooks/useGetScreeeSize";
+import { TaskMarkdownController } from "./TaskMarkdownController";
+import { TaskSearchModal } from "./TaskSearchModal";
+import { selectActiveModal } from "./Modal/modalSlice";
 
 export const Task = () => {
   const { currentPage } = useSelector(selectAuth);
-  const { selectedTask } = useSelector(selectTask);
+  const { activeModal } = useSelector(selectActiveModal);
+  //const { selectedTask } = useSelector(selectTask);
+  const selectedTask = 1;
   const [screenSize] = useGetScreenSize();
+  const isSearchVisible = true;
 
   return (
     <div className="h-screen flex">
@@ -26,7 +31,8 @@ export const Task = () => {
       {!selectedTask && (
         <div className="hidden lg:flex lg:h-full lg:bg-white lg:w-[30%]"></div>
       )}
-      {selectedTask && screenSize.width > 950 && <TaskMarkdownController />}
+      <TaskMarkdownController />
+      {activeModal === "searchModal" && <TaskSearchModal />}
     </div>
   );
 };

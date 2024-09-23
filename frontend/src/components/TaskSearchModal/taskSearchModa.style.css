@@ -1,0 +1,7 @@
+.search-result::-webkit-scrollbar {
+  width: 4px;
+}
+
+.search-result::-webkit-scrollbar-thumb {
+  background-color: #e3e3e3;
+}

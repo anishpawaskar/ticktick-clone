@@ -1,8 +1,17 @@
 import { RiUser3Fill } from "react-icons/ri";
 import { FaCrown } from "react-icons/fa6";
 import { USER_FEATURES, APP_FEATURES } from "./sidebarConstants";
+import { useDispatch } from "react-redux";
+import { toggleModal } from "../Modal/modalSlice";
 
 export const SidebarPresentation = () => {
+  const dispatch = useDispatch();
+
+  const handleUserFeature = (feature) => {
+    if (feature.name === "Search") {
+      dispatch(toggleModal("searchModal"));
+    }
+  };
   return (
     <div
       id="sidebar"
@@ -20,6 +29,7 @@ export const SidebarPresentation = () => {
           const IconComponent = feature.icon;
           return (
             <div
+              onClick={() => handleUserFeature(feature)}
               key={feature.id}
               className="p-1 w-10 h-10 flex justify-center items-center"
             >
