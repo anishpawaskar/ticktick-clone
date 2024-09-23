@@ -1,0 +1,36 @@
+.markdown-title {
+  @apply mb-2.5;
+}
+
+.markdown-title h1 {
+  @apply text-xl font-bold;
+}
+
+.markdown-content {
+  @apply flex flex-col gap-2.5;
+}
+
+.markdown-content h1 {
+  @apply text-lg font-bold;
+}
+
+.markdown-content h2 {
+  @apply text-base font-bold;
+}
+
+.markdown-content h3 {
+  @apply text-sm font-bold;
+}
+
+.markdown-content p {
+  @apply text-sm;
+}
+
+.markdown-content ul {
+  /* TODO: aligh list with other text */
+  @apply list-disc marker:text-[--secondary-color] pl-4;
+}
+
+.markdown-content ul li {
+  @apply text-sm;
+}

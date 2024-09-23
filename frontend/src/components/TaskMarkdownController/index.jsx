@@ -6,6 +6,7 @@ import { useState } from "react";
 import { PRIORITY_ACTIONS } from "./taskMardownController.constant";
 import { DatePicker } from "../DatePicker";
 import { MarkdownEditor } from "./components/MarkdownEditor";
+import { MarkdownPreview } from "./components/MarkdownPreview";
 
 export const TaskMarkdownController = () => {
   const [isPriorityDropdownVisible, setPriorityDropdown] = useState(false);
@@ -111,7 +112,8 @@ export const TaskMarkdownController = () => {
           </div>
         </div>
         <div className="markdown-controller-main-section px-5 mt-2 py-[9px] overflow-auto">
-          <MarkdownEditor />
+          {/* <MarkdownEditor /> */}
+          <MarkdownPreview />
         </div>
       </div>
       {(isPriorityDropdownVisible || isDatePickerVisible) && (
