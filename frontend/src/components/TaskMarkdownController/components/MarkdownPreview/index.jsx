@@ -9,18 +9,6 @@ export const MarkdownPreview = () => {
   # Anish
   `;
 
-  //   const content = `
-  //   # Anish
-  //   ## Anish
-  //   ### Anish
-  //   Anish
-  //   - anish
-  //   ~~~js
-  // console.log('It works!')
-  // var value = 10;
-  // value++
-  // ~~~
-  //   `;
   const content =
     "# Anish\n## Anish\n### Anish\n* anish\n- [ ] anish\n> \tanish\n> anish\n---\nAnish";
 
