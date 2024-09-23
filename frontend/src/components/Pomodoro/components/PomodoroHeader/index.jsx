@@ -51,7 +51,7 @@ export const PomodoroHeader = ({ isPomodoroMode, setIsPomodoroMode }) => {
           <ul className="absolute right-0 top-[30px] z-[60] bg-white rounded-md shadow-2xl border py-1">
             {POMO_MORE_OPTIONS.map((option) => {
               const IconComponent = option.icon;
-
+              //TODO: create statics page for statistic action and focus form modal
               return (
                 <li key={option.id} className="mx-1">
                   <button className="w-full flex items-center h-[34px] pr-1.5 pl-3 min-w-[154px] max-w-[244px] text-[13px] leading-5 text-[--text-gray] rounded hover:bg-[--light-white]">
