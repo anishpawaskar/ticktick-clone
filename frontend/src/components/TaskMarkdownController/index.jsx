@@ -1,6 +1,7 @@
 import { PiLineVertical } from "react-icons/pi";
 import { IoCalendarOutline } from "react-icons/io5";
-import { TbFlag3Filled, TbFlag3 } from "react-icons/tb";
+import { FaRegEdit } from "react-icons/fa";
+import { VscPreview } from "react-icons/vsc";
 import { FiCheck } from "react-icons/fi";
 import { useState } from "react";
 import { PRIORITY_ACTIONS } from "./taskMardownController.constant";
@@ -9,6 +10,7 @@ import { MarkdownEditor } from "./components/MarkdownEditor";
 import { MarkdownPreview } from "./components/MarkdownPreview";
 
 export const TaskMarkdownController = () => {
+  const [isPreviewMode, setIsPreviewMode] = useState(true);
   const [isPriorityDropdownVisible, setPriorityDropdown] = useState(false);
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
   const [priorityLevel, setPriorityLevel] = useState("NONE");
@@ -32,6 +34,7 @@ export const TaskMarkdownController = () => {
             />
 
             <PiLineVertical className="w-4 h-4 text-[--icon-color] opacity-60" />
+
             <div className="relative">
               <button
                 onClick={() => setIsDatePickerVisible(true)}
@@ -54,6 +57,24 @@ export const TaskMarkdownController = () => {
                 </div>
               )}
             </div>
+
+            <PiLineVertical className="w-4 h-4 text-[--icon-color] opacity-60" />
+
+            {isPreviewMode ? (
+              <button
+                onClick={() => setIsPreviewMode(false)}
+                className="p-1 rounded hover:bg-[--light-white]"
+              >
+                <VscPreview className="h-[18px] w-[18px] text-[--text-gray] opacity-60" />
+              </button>
+            ) : (
+              <button
+                onClick={() => setIsPreviewMode(true)}
+                className="p-1 rounded hover:bg-[--light-white]"
+              >
+                <FaRegEdit className="h-[18px] w-[18px] text-[--text-gray] opacity-60" />
+              </button>
+            )}
           </div>
           <div
             //TODO: separate this into different component
@@ -61,7 +82,7 @@ export const TaskMarkdownController = () => {
           >
             <button
               onClick={() => setPriorityDropdown(true)}
-              className="h-full rounded p-1 hover:bg-[--light-white]"
+              className="rounded p-1 hover:bg-[--light-white]"
             >
               <PriorityFlagIcon
                 style={{ color: priority.color }}
@@ -112,8 +133,7 @@ export const TaskMarkdownController = () => {
           </div>
         </div>
         <div className="markdown-controller-main-section px-5 mt-2 py-[9px] overflow-auto">
-          {/* <MarkdownEditor /> */}
-          <MarkdownPreview />
+          {isPreviewMode ? <MarkdownPreview /> : <MarkdownEditor />}
         </div>
       </div>
       {(isPriorityDropdownVisible || isDatePickerVisible) && (
