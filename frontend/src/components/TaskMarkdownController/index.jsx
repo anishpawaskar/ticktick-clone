@@ -8,6 +8,7 @@ import { PRIORITY_ACTIONS } from "./taskMardownController.constant";
 import { DatePicker } from "../DatePicker";
 import { MarkdownEditor } from "./components/MarkdownEditor";
 import { MarkdownPreview } from "./components/MarkdownPreview";
+import { useSelector } from "react-redux";
 
 export const TaskMarkdownController = () => {
   const [isPreviewMode, setIsPreviewMode] = useState(true);
@@ -22,7 +23,10 @@ export const TaskMarkdownController = () => {
 
   return (
     <>
-      <div className="w-[21.45%] h-full bg-white flex flex-col">
+      <div
+        //TODO: make it responsive and when show it for different views tabs and mobile view
+        className="hidden w-[21.45%] h-full bg-white lg:flex flex-col"
+      >
         <div className="markdown-controller-header mt-2 py-[9px] px-5 border-b flex items-center justify-between">
           <div className="h-9 flex items-center">
             <input
