@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { useDispatch } from "react-redux";
-import { closeModal } from "../../../../Modal/modalSlice";
+import { closeModal } from "../../../Modal/modalSlice";
 
 export const TimerFormPopup = () => {
   const [name, setName] = useState("");
