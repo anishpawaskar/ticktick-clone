@@ -12,7 +12,7 @@ export const Pomodoro = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="flex w-full">
+    <div className="flex w-full overflow-hidden">
       <div className="w-full flex flex-col">
         <PomodoroHeader
           isPomodoroMode={isPomodoroMode}
@@ -21,7 +21,7 @@ export const Pomodoro = () => {
         <TimerControlPanel isPomodoroMode={isPomodoroMode} />
       </div>
       {activeModal === "timeFormPopup" && <TimerFormPopup />}
-      <div className="w-[25%] h-full border-l">
+      <div className="w-[25%] min-w-[320px] h-full border-l overflow-auto">
         <PomodoroStatsOverview />
       </div>
       {(activeModal === "timeFormPopup" ||

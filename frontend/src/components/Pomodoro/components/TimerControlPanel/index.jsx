@@ -9,7 +9,7 @@ export const TimerControlPanel = ({ isPomodoroMode }) => {
 
   const isEditTime = false;
   return (
-    <div className="flex-auto flex flex-col items-center overflow-hidden justify-center">
+    <div className="flex-auto flex flex-col items-center justify-center">
       <div className="flex flex-col items-center min-h-[500px] w-full">
         <div className="focus-mode">
           <button className="flex items-center group/focusBtn">

@@ -45,9 +45,7 @@ export const FocusRecords = () => {
                         }`}
                       >
                         <div
-                          className={`absolute left-[-30px] ${
-                            !record?.task && "top-[7px]"
-                          } w-[24px] h-[24px] bg-[#ECF1FE] rounded-full flex items-center justify-center`}
+                          className={`absolute left-[-30px] top-[7px] w-[24px] h-[24px] bg-[#ECF1FE] rounded-full flex items-center justify-center`}
                         >
                           <GiConfirmed className="w-[18px] h-[18px] text-[--secondary-color]" />
                         </div>
