@@ -4,6 +4,7 @@ import { TimerFormPopup } from "./components/TimerFormPopup";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, selectActiveModal } from "../Modal/modalSlice";
 import { TimerControlPanel } from "./components/TimerControlPanel";
+import { PomodoroStatsOverview } from "./components/PomodoroStatsOverview";
 
 export const Pomodoro = () => {
   const [isPomodoroMode, setIsPomodoroMode] = useState(true);
@@ -20,7 +21,9 @@ export const Pomodoro = () => {
         <TimerControlPanel isPomodoroMode={isPomodoroMode} />
       </div>
       {activeModal === "timeFormPopup" && <TimerFormPopup />}
-      <div className="w-[25%] h-full bg-red-400"></div>
+      <div className="w-[25%] h-full border-l">
+        <PomodoroStatsOverview />
+      </div>
       {(activeModal === "timeFormPopup" ||
         activeModal === "pomoMoreOptions") && (
         <div
