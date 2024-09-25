@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { PomodoroTimer } from "./components/PomodoroTimer";
+import { StopwatchTimer } from "./components/StopwatchTimer";
 
-export const TimerControlPanel = () => {
+export const TimerControlPanel = ({ isPomodoroMode }) => {
   const [isClockStarted, setIsClockStarted] = useState(false);
   const [isClockPaused, setIsClockPaused] = useState(false);
 
@@ -19,10 +20,17 @@ export const TimerControlPanel = () => {
           </button>
         </div>
         <div className="timer my-16 w-[360px] h-[360px] relative">
-          <PomodoroTimer
-            isClockPaused={isClockPaused}
-            isClockStarted={isClockStarted}
-          />
+          {isPomodoroMode ? (
+            <PomodoroTimer
+              isClockPaused={isClockPaused}
+              isClockStarted={isClockStarted}
+            />
+          ) : (
+            <StopwatchTimer
+              isClockStarted={isClockStarted}
+              isClockPaused={isClockPaused}
+            />
+          )}
         </div>
         <div className="timer-controls flex-none flex flex-col items-center w-[170px] h-[112px]">
           {!isClockStarted && (

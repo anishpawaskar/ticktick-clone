@@ -17,7 +17,7 @@ export const Pomodoro = () => {
           isPomodoroMode={isPomodoroMode}
           setIsPomodoroMode={setIsPomodoroMode}
         />
-        <TimerControlPanel />
+        <TimerControlPanel isPomodoroMode={isPomodoroMode} />
       </div>
       {activeModal === "timeFormPopup" && <TimerFormPopup />}
       <div className="w-[25%] h-full bg-red-400"></div>
