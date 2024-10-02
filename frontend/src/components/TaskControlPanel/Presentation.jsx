@@ -1,7 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { TaskControlList } from "./components/TaskControlList";
-import { selectTask, toggleControlPanel } from "../../store/taskSlice";
-import { TASK_CONTROLS } from "./taskControlPanel.constatns";
+import { toggleControlPanel } from "../../store/taskSlice";
 import { TaskControlPanelAccordion } from "./components/TaskControlPanelAccordion";
 import { useEffect } from "react";
 import { useGetScreenSize } from "../../cusstomHooks/useGetScreeeSize";
@@ -14,21 +13,12 @@ export const TaskControlPanelPresentation = ({
   const [screenSize] = useGetScreenSize();
 
   useEffect(() => {
-    const handleControlPanelVisibility = () => {
-      const windowWidth = window.innerWidth;
-      if (windowWidth > 630) {
-        dispatch(toggleControlPanel(true));
-      } else {
-        dispatch(toggleControlPanel(false));
-      }
-    };
-    handleControlPanelVisibility();
-    window.addEventListener("resize", handleControlPanelVisibility);
-
-    return () => {
-      window.removeEventListener("resize", handleControlPanelVisibility);
-    };
-  }, []);
+    if (screenSize.width > 630) {
+      dispatch(toggleControlPanel(true));
+    } else {
+      dispatch(toggleControlPanel(false));
+    }
+  }, [screenSize.width]);
 
   return (
     <>
@@ -45,7 +35,7 @@ export const TaskControlPanelPresentation = ({
       </div>
       {!isControlPanelVisible && (
         <div
-          classNam={`${
+          className={`${
             isControlPanelVisible ? "hidden" : "block"
           } top-0 left-0 w-full h-full z-[70] bg-red-400`}
         ></div>
@@ -55,17 +45,9 @@ export const TaskControlPanelPresentation = ({
           onClick={() => dispatch(toggleControlPanel(!isControlPanelVisible))}
           className={`absolute top-0 ${
             screenSize.width < 630 && "left-[50px]"
-          } ${
-            screenSize.width < 500 && "left-0"
-          } z-[70] w-full h-full bg-red-500`}
+          } ${screenSize.width < 500 && "left-0"} z-[70] w-full h-full`}
         ></div>
       )}
     </>
   );
 };
-
-/* 
-  togglePanel width:
-  less than 630: 305px and for transition they have been setting position to absolute and left to -currentWidth
-  grater than 630: 213px same for transition
-*/
