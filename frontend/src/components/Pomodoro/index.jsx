@@ -21,7 +21,7 @@ export const Pomodoro = () => {
         <TimerControlPanel isPomodoroMode={isPomodoroMode} />
       </div>
       {activeModal === "timeFormPopup" && <TimerFormPopup />}
-      <div className="w-[25%] min-w-[320px] h-full border-l overflow-auto">
+      <div className="hidden lg:block w-[25%] min-w-[320px] h-full border-l overflow-auto">
         <PomodoroStatsOverview />
       </div>
       {(activeModal === "timeFormPopup" ||

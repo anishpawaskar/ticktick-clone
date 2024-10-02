@@ -6,6 +6,55 @@ import { StopwatchTimer } from "./components/StopwatchTimer";
 export const TimerControlPanel = ({ isPomodoroMode }) => {
   const [isClockStarted, setIsClockStarted] = useState(false);
   const [isClockPaused, setIsClockPaused] = useState(false);
+  const [timerSize, setTimerSize] = useState({
+    width: 360,
+    height: 360,
+    textSize: 54,
+    lineHeight: 65,
+    btnSize: 170,
+  });
+
+  useEffect(() => {
+    const handleTimerSize = () => {
+      const windowWidth = window.innerWidth;
+
+      if (windowWidth < 950 && windowWidth > 720) {
+        setTimerSize({
+          width: 320,
+          height: 320,
+          textSize: 49,
+          lineHeight: 59,
+          btnSize: 150,
+        });
+      } else if (windowWidth < 720) {
+        //TODO: there are many resizeable which can done later
+        const newSize = 260 + ((windowWidth - 600) / (720 - 600)) * (320 - 260);
+        const newTextSize =
+          40 + ((windowWidth - 600) / (720 - 600)) * (49 - 40);
+        const newLineHeight =
+          48 + ((windowWidth - 600) / (720 - 600)) * (59 - 48);
+        const newBtnSize =
+          140 + ((windowWidth - 600) / (720 - 600)) * (150 - 140);
+        const newMargin = 40 + (720 - windowWidth) * 0.2381;
+        console.log(newMargin);
+
+        setTimerSize({
+          width: Math.max(newSize, 260),
+          height: Math.max(newSize, 260),
+          textSize: Math.max(newTextSize, 40),
+          lineHeight: Math.max(newLineHeight, 48),
+          btnSize: Math.max(newBtnSize, 140),
+        });
+      }
+    };
+
+    window.addEventListener("resize", handleTimerSize);
+
+    handleTimerSize();
+    return () => {
+      window.removeEventListener("resize", handleTimerSize);
+    };
+  }, []);
 
   const isEditTime = false;
   return (
@@ -19,9 +68,15 @@ export const TimerControlPanel = ({ isPomodoroMode }) => {
             <MdOutlineKeyboardArrowRight className="h-4 w-4 opacity-40 group-hover/focusBtn:opacity-60" />
           </button>
         </div>
-        <div className="timer my-16 w-[360px] h-[360px] relative">
+        <div
+          style={{ width: timerSize.width, height: timerSize.height }}
+          className="timer my-16 w-[360px] h-[360px] relative"
+        >
           {isPomodoroMode ? (
             <PomodoroTimer
+              width={timerSize.width}
+              height={timerSize.height}
+              clockTextSize={timerSize.textSize}
               isClockPaused={isClockPaused}
               isClockStarted={isClockStarted}
             />
@@ -32,7 +87,10 @@ export const TimerControlPanel = ({ isPomodoroMode }) => {
             />
           )}
         </div>
-        <div className="timer-controls flex-none flex flex-col items-center w-[170px] h-[112px]">
+        <div
+          style={{ width: timerSize.btnSize }}
+          className="timer-controls flex-none flex flex-col items-center w-[170px] h-[112px]"
+        >
           {!isClockStarted && (
             <button
               onClick={() => setIsClockStarted(true)}

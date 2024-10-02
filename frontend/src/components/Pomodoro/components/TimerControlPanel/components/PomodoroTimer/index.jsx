@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
-export const PomodoroTimer = ({ isClockPaused, isClockStarted }) => {
+export const PomodoroTimer = ({
+  width,
+  height,
+  clockTextSize,
+  isClockPaused,
+  isClockStarted,
+}) => {
   const [pomodoroDuration, setPomodoroDuration] = useState(25);
   const [pomodoroSeconds, setPomodoroSeconds] = useState(0);
 
@@ -37,7 +43,7 @@ export const PomodoroTimer = ({ isClockPaused, isClockStarted }) => {
   return (
     <>
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <svg width="360" height="360" viewBox="0 0 400 400">
+        <svg width={width} height={height} viewBox="0 0 400 400">
           <circle
             stroke="rgba(25, 25, 25, 0.1)"
             cx="200"
@@ -61,7 +67,10 @@ export const PomodoroTimer = ({ isClockPaused, isClockStarted }) => {
         </svg>
       </div>
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center text-[--text-gray]">
-        <button className="text-[54px] leading-[65px]">
+        <button
+          style={{ fontSize: clockTextSize }}
+          className="text-[54px] leading-[65px]"
+        >
           {String(pomodoroDuration).padStart(2, "0")}:
           {String(pomodoroSeconds).padStart(2, "0")}
         </button>
