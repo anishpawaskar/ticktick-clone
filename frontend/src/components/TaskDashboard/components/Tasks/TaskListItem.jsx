@@ -23,7 +23,7 @@ export const TasksListItem = ({ task }) => {
     <React.Fragment key={task.id}>
       <li
         style={{ marginLeft: `${task.depth * 16}px` }}
-        className="px-[26px] group/task"
+        className="pl-[20px] pr-[18px] sm:px-[26px] group/task"
       >
         <div
           className={`${isTaskHasSubtasks ? "pl-1" : "pl-4"} ${

@@ -10,7 +10,7 @@ export const TaskForm = () => {
   //TODO: remove focus when user clicks somewhere else
 
   return (
-    <div className="px-[26px] pb-4 w-full">
+    <div className="pl-[20px] pr-[18px] sm:px-[26px] pb-4 w-full">
       {isTaskFormVisible ? (
         <div
           className={`flex gap-2 bg-transparent min-h-9 h-9 max-h-40 px-2 border border-[--secondary-color] rounded-md`}
