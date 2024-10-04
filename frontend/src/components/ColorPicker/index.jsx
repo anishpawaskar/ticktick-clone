@@ -1,3 +1,4 @@
+import React from "react";
 import { COLORS_DATA } from "./colorPicker.constant";
 
 export const ColorPicker = ({ selectedColor, handleColorPick }) => {
@@ -9,7 +10,7 @@ export const ColorPicker = ({ selectedColor, handleColorPick }) => {
           const isSelected = color.id === selectedColor;
 
           return (
-            <>
+            <React.Fragment key={color.id}>
               {color.name === "Default" ? (
                 <li key={color.id} className="flex items-center relative">
                   <button
@@ -47,7 +48,7 @@ export const ColorPicker = ({ selectedColor, handleColorPick }) => {
                   )}
                 </li>
               )}
-            </>
+            </React.Fragment>
           );
         })}
       </ul>

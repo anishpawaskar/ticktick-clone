@@ -5,6 +5,7 @@ import { closeModal } from "../Modal/modalSlice";
 export const RoundedPopupCard = ({
   title,
   type,
+  isActive,
   isSaveButtonDisable,
   handlePopupSave,
   children,
@@ -49,7 +50,9 @@ export const RoundedPopupCard = ({
           </button>
         </div>
       </div>
-      {/* <div className="absolute top-0 left-0 w-full h-full z-[100]"></div> */}
+      {isActive && (
+        <div className="absolute top-0 left-0 w-full h-full z-[100]"></div>
+      )}
     </>
   );
 };

@@ -7,16 +7,12 @@ import { useState } from "react";
 import { TaskControlPanelAccordionPanel } from "./TaskControlPanelAccordionPanel";
 import { LISTS_DATA } from "../../taskControlPanel.constatns";
 
-export const TaskControlPanelAccordion = ({ title }) => {
+export const TaskControlPanelAccordion = ({ title, openPopupForm }) => {
   const [isAccordionOpen, setIsAccordionOpen] = useState(true);
   const [lists, setLists] = useState(LISTS_DATA);
 
   const toggleAccordion = () => {
     setIsAccordionOpen((prevState) => !prevState);
-  };
-
-  const openModal = (e) => {
-    e.stopPropagation();
   };
 
   return (
@@ -37,7 +33,7 @@ export const TaskControlPanelAccordion = ({ title }) => {
             {title}
           </span>
           <span
-            onClick={openModal}
+            onClick={(e) => openPopupForm(e)}
             role="button"
             className="invisible group-hover/accordion-btn:visible"
           >

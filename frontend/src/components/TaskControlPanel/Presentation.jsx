@@ -1,14 +1,17 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { TaskControlList } from "./components/TaskControlList";
 import { toggleControlPanel } from "../../store/taskSlice";
 import { TaskControlPanelAccordion } from "./components/TaskControlPanelAccordion";
-import { useEffect } from "react";
 import { useGetScreenSize } from "../../cusstomHooks/useGetScreeeSize";
+import { selectActiveModal, toggleModal } from "../Modal/modalSlice";
+import { ProjectFrom } from "../PopupForm/ProjectForm";
 
 export const TaskControlPanelPresentation = ({
   isControlPanelVisible,
   overviewList,
 }) => {
+  const { activeModal } = useSelector(selectActiveModal);
   const dispatch = useDispatch();
   const [screenSize] = useGetScreenSize();
 
@@ -19,6 +22,11 @@ export const TaskControlPanelPresentation = ({
       dispatch(toggleControlPanel(false));
     }
   }, [screenSize.width]);
+
+  const openPopupForm = (e) => {
+    e.stopPropagation();
+    dispatch(toggleModal("projectForm"));
+  };
 
   return (
     <>
@@ -31,7 +39,10 @@ export const TaskControlPanelPresentation = ({
       >
         <TaskControlList lists={overviewList} />
         <hr className="my-4" />
-        <TaskControlPanelAccordion title="Lists" />
+        <TaskControlPanelAccordion
+          title="Lists"
+          openPopupForm={openPopupForm}
+        />
       </div>
       {!isControlPanelVisible && (
         <div
@@ -47,6 +58,9 @@ export const TaskControlPanelPresentation = ({
             screenSize.width < 630 && "left-[50px]"
           } ${screenSize.width < 500 && "left-0"} z-[70] w-full h-full`}
         ></div>
+      )}
+      {activeModal === "projectForm" && (
+        <ProjectFrom isActive={activeModal === "projectForm"} />
       )}
     </>
   );
