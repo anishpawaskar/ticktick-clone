@@ -43,7 +43,7 @@ export const RoundedPopupCard = ({
           <button
             disabled={isSaveButtonDisable}
             onClick={() => handlePopupSave()}
-            className="leading-none text-[14px] h-[30px] min-w-[100px] py-1.5 rounded-md border text-[--primary-color] bg-[--secondary-color] disabled:bg-[#B5C7FD] hover:bg-[#6C8EFB] active:bg-[#3E60CD] transition-colors duration-200 ease-in"
+            className="leading-none text-[14px] h-[30px] min-w-[100px] py-1.5 rounded-md border text-[--primary-color] bg-[--secondary-color] disabled:bg-[#B5C7FD] disabled:cursor-not-allowed hover:bg-[#6C8EFB] active:bg-[#3E60CD] transition-colors duration-200 ease-in"
           >
             Save
           </button>
