@@ -4,6 +4,7 @@ import optionsSlice from "../components/OptionsPanel/optionsSlice";
 import { apiSlice } from "./services/api";
 import modalSlice from "../components/Modal/modalSlice";
 import taskSlice from "./taskSlice";
+import projectSlice from "./slices/projectSlice";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     options: optionsSlice,
     modal: modalSlice,
     task: taskSlice,
+    project: projectSlice,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>

@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { COLORS_DATA } from "../ColorPicker/colorPicker.constant";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../Modal/modalSlice";
+import { addNewProject } from "../../store/slices/projectSlice";
 
 export const ProjectFrom = ({ isActive }) => {
   const [nameInput, setNameInput] = useState("");
@@ -37,8 +38,12 @@ export const ProjectFrom = ({ isActive }) => {
         name: nameInput,
         color: color.color,
         isInSmartList: !isInSmartList,
+        //TODO: below things needs to be added from backend
+        isPin: false,
+        isArchive: false,
       };
-      console.log("save form", body);
+
+      dispatch(addNewProject(body));
       dispatch(closeModal());
     }
   };
