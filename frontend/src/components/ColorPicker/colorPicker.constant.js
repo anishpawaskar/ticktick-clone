@@ -1,7 +1,7 @@
 export const COLORS_DATA = [
   {
     id: 1,
-    color: "#fff",
+    color: null,
     name: "Default",
   },
   {

@@ -2,18 +2,18 @@ import { COLORS_DATA } from "./colorPicker.constant";
 
 export const ColorPicker = ({ selectedColor, handleColorPick }) => {
   return (
-    <div className="flex items-center">
+    <div className="flex items-center mt-5">
       <p className="text-[13px] leading-7 float-left">Color</p>
       <ul className="flex flex-auto items-center h-full gap-3 ml-10">
         {COLORS_DATA.map((color) => {
           const isSelected = color.id === selectedColor;
-          console.log(isSelected);
+
           return (
             <>
               {color.name === "Default" ? (
                 <li key={color.id} className="flex items-center relative">
                   <button
-                    style={{ background: color.color }}
+                    style={{ background: "#fff" }}
                     className={`${
                       isSelected ? "h-[14px] w-[14px]" : "h-[18px] w-[18px]"
                     } rounded-full border border-[--text-gray-4]`}
