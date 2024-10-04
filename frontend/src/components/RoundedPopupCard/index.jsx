@@ -5,6 +5,7 @@ import { closeModal } from "../Modal/modalSlice";
 export const RoundedPopupCard = ({
   title,
   type,
+  isSaveButtonDisable,
   handlePopupSave,
   children,
 }) => {
@@ -25,7 +26,13 @@ export const RoundedPopupCard = ({
             <RxCross2 className="h-[18px] w-[18px] text-[--icon-color] leading-[16px] opacity-60" />
           </button>
         </div>
-        <div className="popup-body px-5 pb-[50px] flex-auto">{children}</div>
+        <div
+          className={`popup-body px-5 flex-auto ${
+            type === "tag" ? "pb-[50px]" : "pb-5"
+          }`}
+        >
+          {children}
+        </div>
         <div className="popup-footer flex items-center justify-end pt-3 px-5 pb-4">
           <button
             onClick={() => dispatch(closeModal())}
@@ -34,6 +41,7 @@ export const RoundedPopupCard = ({
             Close
           </button>
           <button
+            disabled={isSaveButtonDisable}
             onClick={() => handlePopupSave()}
             className="leading-none text-[14px] h-[30px] min-w-[100px] py-1.5 rounded-md border text-[--primary-color] bg-[--secondary-color] disabled:bg-[#B5C7FD] hover:bg-[#6C8EFB] active:bg-[#3E60CD] transition-colors duration-200 ease-in"
           >
