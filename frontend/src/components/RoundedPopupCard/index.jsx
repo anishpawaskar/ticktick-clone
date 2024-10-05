@@ -16,13 +16,18 @@ export const RoundedPopupCard = ({
     <>
       <div
         className={`absolute top-[20%] left-1/2 -translate-x-1/2 z-[110] bg-white rounded-xl border min-h-[180px] shadow-2xl flex flex-col ${
-          type === "tag" && "w-[90%] xs:w-[380px]"
-        } ${type == "project" && "w-[90%] sm:w-[440px]"}`}
+          type === "tag" ? "w-[90%] xs:w-[380px]" : "w-[90%] sm:w-[440px]"
+        }`}
       >
         <div className="popup-header flex items-center px-5 min-h-14">
-          <h3 className="flex-[auto] truncate text-base text-[--text-gray] font-bold leading-[1.3]">
-            {title}
-          </h3>
+          {typeof title === "string" ? (
+            <h3 className="flex-[auto] truncate text-base text-[--text-gray] font-bold leading-[1.3]">
+              {title}
+            </h3>
+          ) : (
+            <h3 className="leading-tight flex-[auto] truncate">{title}</h3>
+          )}
+
           <button onClick={() => dispatch(closeModal())}>
             <RxCross2 className="h-[18px] w-[18px] text-[--icon-color] leading-[16px] opacity-60" />
           </button>
