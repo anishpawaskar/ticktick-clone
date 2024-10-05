@@ -6,13 +6,17 @@ import { TaskControlPanelAccordion } from "./components/TaskControlPanelAccordio
 import { useGetScreenSize } from "../../cusstomHooks/useGetScreeeSize";
 import { selectActiveModal, toggleModal } from "../Modal/modalSlice";
 import { ProjectFrom } from "../PopupForm/ProjectForm";
+import { selectProject } from "../../store/slices/projectSlice";
+import { DeleteForm } from "../PopupForm/DeleteForm";
 
 export const TaskControlPanelPresentation = ({
   isControlPanelVisible,
   overviewList,
 }) => {
   const { activeModal } = useSelector(selectActiveModal);
+  const { projects } = useSelector(selectProject);
   const dispatch = useDispatch();
+
   const [screenSize] = useGetScreenSize();
 
   useEffect(() => {
@@ -41,6 +45,7 @@ export const TaskControlPanelPresentation = ({
         <hr className="my-4" />
         <TaskControlPanelAccordion
           title="Lists"
+          lists={projects}
           openPopupForm={openPopupForm}
         />
       </div>

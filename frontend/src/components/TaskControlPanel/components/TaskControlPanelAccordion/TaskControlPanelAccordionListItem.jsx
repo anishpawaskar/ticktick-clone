@@ -3,18 +3,30 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { BsThreeDots } from "react-icons/bs";
 import { LISTS_MODAL_ACTIONS } from "../../taskControlPanel.constatns";
 import { TaskAccordionActionPopup } from "./TaskAccordionActionsPopup";
+import { DeleteForm } from "../../../PopupForm/DeleteForm";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  closeModal,
+  selectActiveModal,
+  toggleModal,
+} from "../../../Modal/modalSlice";
+import {
+  deleteProject,
+  toggleArchiveProject,
+  togglePinProject,
+} from "../../../../store/slices/projectSlice";
+import { ArchiveForm } from "../../../PopupForm/ArchiveForm";
 
 export const TaskControlPanelAccordionListItem = ({
   item,
-  lists,
-  setLists,
   selectedListItem,
   setSelectedListItem,
 }) => {
   const [isAccordionListItemModalVisible, setIsAccordionListItemModalVisible] =
     useState(false);
-  const [isPopupVisible, setIsPopupVisisble] = useState(false);
-  const [action, setAction] = useState("");
+
+  const { activeModal } = useSelector(selectActiveModal);
+  const dispatch = useDispatch();
 
   const isSelected = selectedListItem === item.id;
 
@@ -31,32 +43,23 @@ export const TaskControlPanelAccordionListItem = ({
     setIsAccordionListItemModalVisible(false);
   };
 
-  const handlePopup = (popupAction, action) => {
-    if (popupAction === "close") {
-      setIsPopupVisisble(false);
-      return;
-    }
+  const handlePopupSave = () => {
+    switch (activeModal) {
+      case "deleteForm": {
+        dispatch(deleteProject({ projectId: item.id }));
+        dispatch(closeModal());
 
-    switch (action) {
-      case "archive": {
-        console.log("coming here");
-        const updatedList = lists.map((listItem) =>
-          listItem.id === item.id ? { ...listItem, isArchive: true } : listItem
-        );
-        setAction("");
-        console.log("updated", updatedList);
-        setLists(updatedList);
-        setIsPopupVisisble(false);
         break;
       }
-
-      case "delete": {
-        const updatedList = lists.map((listItem) =>
-          listItem.id === item.id ? { ...listItem, isDelete: true } : listItem
+      case "archiveForm": {
+        dispatch(
+          toggleArchiveProject({
+            projectId: item.id,
+            isProjectArchived: item.isArchive,
+          })
         );
-        setAction("");
-        setLists(updatedList);
-        setIsPopupVisisble(false);
+        dispatch(closeModal());
+
         break;
       }
     }
@@ -99,22 +102,21 @@ export const TaskControlPanelAccordionListItem = ({
         {isAccordionListItemModalVisible && (
           <div className="absolute z-20 top-7 right-[-160px] flex flex-col p-1 shadow-2xl rounded-[5px] min-w-44 text-sm bg-white">
             {LISTS_MODAL_ACTIONS.map((action) => {
-              const handleActions = (item, action) => {
+              const handleActions = (action) => {
                 switch (action) {
                   case "edit": {
                     console.log("open edit modal"); //TODO: edit list item form
-                    setAction(action);
+
                     break;
                   }
 
                   case "pin": {
-                    const updatedList = lists.map((listItem) =>
-                      listItem.id === item.id
-                        ? { ...listItem, isPin: true }
-                        : { listItem }
+                    dispatch(
+                      togglePinProject({
+                        projectId: item.id,
+                        isProjectPinned: item.isPin,
+                      })
                     );
-                    setAction(action);
-                    setLists(updatedList);
                     break;
                   }
 
@@ -122,25 +124,23 @@ export const TaskControlPanelAccordionListItem = ({
                     console.log(
                       "create same list item with same name and everything only id will change"
                     );
-                    setAction(action);
+
                     break;
                   }
 
                   case "share": {
                     console.log("share link");
-                    setAction(action);
+
                     break;
                   }
 
                   case "archive": {
-                    setAction(action);
-                    setIsPopupVisisble(true);
+                    dispatch(toggleModal("archiveForm"));
                     break;
                   }
 
                   case "delete": {
-                    setAction(action);
-                    setIsPopupVisisble(true);
+                    dispatch(toggleModal("deleteForm"));
                     break;
                   }
                 }
@@ -149,7 +149,7 @@ export const TaskControlPanelAccordionListItem = ({
 
               return (
                 <button
-                  onClick={() => handleActions(item, action.action)}
+                  onClick={() => handleActions(action.action)}
                   key={action.id}
                   className="w-full h-9 rounded-[4px] hover:bg-[--light-white] flex justify-start items-center px-[10px]"
                 >
@@ -166,11 +166,17 @@ export const TaskControlPanelAccordionListItem = ({
           className="absolute top-0 left-0 w-full h-full z-10"
         ></div>
       )}
-      {isPopupVisible && (
-        <TaskAccordionActionPopup
-          action={action}
+      {activeModal === "deleteForm" && (
+        <DeleteForm
           item={item}
-          handlePopup={handlePopup}
+          isActive={activeModal === "delete"}
+          handlePopupSave={handlePopupSave}
+        />
+      )}
+      {activeModal === "archiveForm" && (
+        <ArchiveForm
+          isActive={activeModal === "archiveForm"}
+          handlePopupSave={handlePopupSave}
         />
       )}
     </React.Fragment>

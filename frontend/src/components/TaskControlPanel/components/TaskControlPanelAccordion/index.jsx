@@ -7,9 +7,9 @@ import { useState } from "react";
 import { TaskControlPanelAccordionPanel } from "./TaskControlPanelAccordionPanel";
 import { LISTS_DATA } from "../../taskControlPanel.constatns";
 
-export const TaskControlPanelAccordion = ({ title, openPopupForm }) => {
+export const TaskControlPanelAccordion = ({ title, lists, openPopupForm }) => {
   const [isAccordionOpen, setIsAccordionOpen] = useState(true);
-  const [lists, setLists] = useState(LISTS_DATA);
+  //const [lists, setLists] = useState(LISTS_DATA);
 
   const toggleAccordion = () => {
     setIsAccordionOpen((prevState) => !prevState);
@@ -44,7 +44,7 @@ export const TaskControlPanelAccordion = ({ title, openPopupForm }) => {
       <TaskControlPanelAccordionPanel
         lists={lists}
         isAccordionOpen={isAccordionOpen}
-        setLists={setLists}
+        setLists={10}
       />
     </div>
   );

@@ -8,9 +8,7 @@ export const TaskControlPanelAccordionPanel = ({
 }) => {
   const [selectedListItem, setSelectedListItem] = useState(1);
 
-  const filteredList = lists.filter(
-    (item) => !item.isDelete && !item.isArchive
-  );
+  const filteredList = lists.filter((item) => !item.isArchive);
 
   if (!lists.length) {
     return (

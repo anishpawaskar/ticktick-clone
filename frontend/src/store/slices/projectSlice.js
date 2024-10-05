@@ -27,10 +27,43 @@ const projectSlice = createSlice({
     addNewProject: (state, { payload }) => {
       state.projects.push(payload);
     },
+    deleteProject: (state, { payload: { projectId } }) => {
+      const filterdProjects = state.projects.filter(
+        (project) => project.id !== projectId
+      );
+
+      state.projects = filterdProjects;
+    },
+    toggleArchiveProject: (
+      state,
+      { payload: { projectId, isProjectArchived } }
+    ) => {
+      const updatedProject = state.projects.map((project) =>
+        project.id === projectId
+          ? { ...project, isArchive: !isProjectArchived }
+          : project
+      );
+
+      state.projects = updatedProject;
+    },
+    togglePinProject: (state, { payload: { projectId, isProjectPinned } }) => {
+      const updatedProject = state.projects.map((project) =>
+        project.id === projectId
+          ? { ...project, isPin: !isProjectPinned }
+          : project
+      );
+
+      state.projects = updatedProject;
+    },
   },
 });
 
-export const { addNewProject } = projectSlice.actions;
+export const {
+  addNewProject,
+  deleteProject,
+  toggleArchiveProject,
+  togglePinProject,
+} = projectSlice.actions;
 export const selectProject = (state) => state.project;
 
 export default projectSlice.reducer;
