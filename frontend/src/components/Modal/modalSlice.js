@@ -4,6 +4,7 @@ const modalSlice = createSlice({
   name: "modal",
   initialState: {
     activeModal: "",
+    isEditModalActive: null,
   },
   reducers: {
     toggleModal: (state, { payload }) => {
@@ -16,10 +17,21 @@ const modalSlice = createSlice({
     closeModal: (state) => {
       state.activeModal = "";
     },
+    toggleEditModal: (state, { payload }) => {
+      if (payload === state.isEditModalActive) {
+        state.isEditModalActive = null;
+      } else {
+        state.isEditModalActive = payload;
+      }
+    },
+    closeEditModal: (state) => {
+      state.isEditModalActive = null;
+    },
   },
 });
 
-export const { toggleModal, closeModal } = modalSlice.actions;
+export const { toggleModal, closeModal, toggleEditModal, closeEditModal } =
+  modalSlice.actions;
 export const selectActiveModal = (state) => state.modal;
 
 export default modalSlice.reducer;
