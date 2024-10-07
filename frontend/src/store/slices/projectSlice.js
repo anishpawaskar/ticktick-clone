@@ -28,12 +28,9 @@ const projectSlice = createSlice({
       state.projects.push(payload);
     },
     editProject: (state, { payload: { projectId, body } }) => {
-      console.log("body", body);
       const updatedProject = state.projects.map((project) =>
         project.id === projectId ? { ...project, ...body } : project
       );
-
-      console.log("updated list", updatedProject);
 
       state.projects = updatedProject;
     },
