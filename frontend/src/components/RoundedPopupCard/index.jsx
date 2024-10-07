@@ -1,6 +1,6 @@
 import { RxCross2 } from "react-icons/rx";
 import { useDispatch } from "react-redux";
-import { closeModal } from "../Modal/modalSlice";
+import { closeEditModal, closeModal } from "../Modal/modalSlice";
 
 export const RoundedPopupCard = ({
   title,
@@ -28,7 +28,15 @@ export const RoundedPopupCard = ({
             <h3 className="leading-tight flex-[auto] truncate">{title}</h3>
           )}
 
-          <button onClick={() => dispatch(closeModal())}>
+          <button
+            onClick={() => {
+              if (title.toLowerCase().includes("edit")) {
+                dispatch(closeEditModal());
+              } else {
+                dispatch(closeModal());
+              }
+            }}
+          >
             <RxCross2 className="h-[18px] w-[18px] text-[--icon-color] leading-[16px] opacity-60" />
           </button>
         </div>
@@ -41,7 +49,13 @@ export const RoundedPopupCard = ({
         </div>
         <div className="popup-footer flex items-center justify-end pt-3 px-5 pb-4">
           <button
-            onClick={() => dispatch(closeModal())}
+            onClick={() => {
+              if (title.toLowerCase().includes("edit")) {
+                closeEditModal();
+              } else {
+                dispatch(closeModal());
+              }
+            }}
             className="leading-none text-[14px] h-[30px] min-w-[100px] py-1.5 rounded-md border text-[--text-gray-6] bg-transparent hover:bg-[--light-white] active:bg-[#E8E8E8] transition-colors duration-200 ease-in mr-3"
           >
             Close
