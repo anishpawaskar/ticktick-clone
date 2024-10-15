@@ -1,16 +1,15 @@
-import { useState } from "react";
 import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowRight,
-  MdOutlineCheck,
-  MdCheck,
 } from "react-icons/md";
+import { LuFolderArchive } from "react-icons/lu";
 import { IoAddOutline } from "react-icons/io5";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { CustomAccordionOptions } from "./CustomAccordionOptions";
 
 export const CustomAccordion = ({
   title,
+  type,
   accordionOptions,
   isAccordionOpen,
   isAddButtonActive,
@@ -23,19 +22,38 @@ export const CustomAccordion = ({
 }) => {
   return (
     <div className="accordion-wrapper pl-1.5 pr-1 w-full">
-      <div className="accordion-button w-full h-7 rounded-md  relative">
+      <div
+        className={`accordion-button w-full ${
+          type === "archive" ? "h-9" : "h-7"
+        } relative`}
+      >
         <button
           onClick={toggleAccordion}
-          className="w-full h-full flex items-center pr-1.5 text-[--text-gray-4] hover:bg-[--light-white] group/accordion-btn"
+          className={`w-full h-full flex items-center pr-1.5 ${
+            type === "archive" ? "text-[--text-gray]" : "text-[--text-gray-4]"
+          } rounded-md  hover:bg-[--light-white] group/accordion-btn`}
         >
-          <span className="invisible group-hover/accordion-btn:visible">
+          <span
+            className={`${
+              type === "archive" ? "visible" : "invisible"
+            } group-hover/accordion-btn:visible`}
+          >
             {isAccordionOpen ? (
-              <MdOutlineKeyboardArrowDown className="h-4 w-4 hover:text-[--text-gray]" />
+              <MdOutlineKeyboardArrowDown className="h-4 w-4 text-[--text-gray-4] hover:text-[--text-gray]" />
             ) : (
-              <MdOutlineKeyboardArrowRight className="h-4 w-4 hover:text-[--text-gray]" />
+              <MdOutlineKeyboardArrowRight className="h-4 w-4 text-[--text-gray-4] hover:text-[--text-gray]" />
             )}
           </span>
-          <span className="flex flex-auto items-start text-xs font-semibold truncate mr-2">
+          <span
+            className={`flex flex-auto  ${
+              type === "archive"
+                ? "text-sm font-normal items-center"
+                : "text-xs font-semibold items-start"
+            } truncate mr-2`}
+          >
+            {type === "archive" && (
+              <LuFolderArchive className="mr-2 h-4 w-4 text-[--icon-color] opacity-60" />
+            )}
             {title}
           </span>
           <span className="flex items-center gap-1.5">
