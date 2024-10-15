@@ -51,7 +51,7 @@ export const RoundedPopupCard = ({
           <button
             onClick={() => {
               if (title.toLowerCase().includes("edit")) {
-                closeEditModal();
+                dispatch(closeEditModal());
               } else {
                 dispatch(closeModal());
               }
