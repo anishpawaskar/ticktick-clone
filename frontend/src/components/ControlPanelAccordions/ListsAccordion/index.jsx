@@ -4,6 +4,7 @@ import {
   deleteProject,
   selectProject,
   toggleArchiveProject,
+  togglePinProject,
 } from "../../../store/slices/projectSlice";
 import { CustomAccordion } from "../../CustomAccordion";
 import { CustomAccordionPanel } from "../../CustomAccordion/CustomAccordionPanel";
@@ -63,10 +64,12 @@ export const ListsAccordion = () => {
       }
 
       case "pin": {
-        dispatch({
-          projectId: project.id,
-          isProjectPinned: project.isPin,
-        });
+        dispatch(
+          togglePinProject({
+            projectId: project.id,
+            isProjectPinned: project.isPin,
+          })
+        );
         break;
       }
 
@@ -129,7 +132,7 @@ export const ListsAccordion = () => {
     >
       <CustomAccordionPanel
         isAccordionOpen={isAccordionOpen}
-        isListEmpty={!projects.length}
+        isListEmpty={!filteredProject.length}
       >
         {filteredProject.map((project) => {
           return (
