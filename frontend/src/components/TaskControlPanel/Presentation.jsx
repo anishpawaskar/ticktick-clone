@@ -37,7 +37,7 @@ export const TaskControlPanelPresentation = ({
           isControlPanelVisible ? "block" : "hidden"
         } fixed top-0 left-0 xs:left-[50px] xs:w-[50%] xs:shadow-lg bg-white w-[305px] z-[100] h-full  ${
           isControlPanelVisible ? "sm:block" : "sm:hidden"
-        } sm:static sm:w-[213px] sm:shadow-none border-r`}
+        } sm:static sm:w-[213px] sm:z-0 sm:shadow-none border-r`}
       >
         <TaskControlList lists={overviewList} />
         <hr className="my-4" />
