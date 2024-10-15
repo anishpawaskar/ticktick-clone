@@ -8,6 +8,9 @@ import { selectActiveModal, toggleModal } from "../Modal/modalSlice";
 import { ProjectFrom } from "../PopupForm/ProjectForm";
 import { selectProject } from "../../store/slices/projectSlice";
 import { DeleteForm } from "../PopupForm/DeleteForm";
+import { CustomAccordion } from "../CustomAccordion";
+import { ListsAccordion } from "../ControlPanelAccordions/ListsAccordion";
+import { ArchiveListAccordion } from "../ControlPanelAccordions/ArchiveListsAccordion";
 
 export const TaskControlPanelPresentation = ({
   isControlPanelVisible,
@@ -27,11 +30,6 @@ export const TaskControlPanelPresentation = ({
     }
   }, [screenSize.width]);
 
-  const openPopupForm = (e) => {
-    e.stopPropagation();
-    dispatch(toggleModal("projectForm"));
-  };
-
   return (
     <>
       <div
@@ -43,11 +41,8 @@ export const TaskControlPanelPresentation = ({
       >
         <TaskControlList lists={overviewList} />
         <hr className="my-4" />
-        <TaskControlPanelAccordion
-          title="Lists"
-          lists={projects}
-          openPopupForm={openPopupForm}
-        />
+        <ListsAccordion />
+        <ArchiveListAccordion />
       </div>
       {!isControlPanelVisible && (
         <div
