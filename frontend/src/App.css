@@ -35,3 +35,7 @@
 .react-markdown-preview h6 {
   @apply text-xs sm:text-[0.67em] font-bold;
 }
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
